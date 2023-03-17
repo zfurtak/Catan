@@ -58,6 +58,7 @@ Further information: https://www.catan.com/sites/default/files/2021-06/catan_bas
 - Minerva Gomez
 - Pablo Ferreiro
 - Pablo Luis Molina Blanes
+- Sergio Astorga Segovia
 - Emilio Rodrigo Carreira Villalta
 - Zuzanna Furtak
 - Agnieszka Lasek
