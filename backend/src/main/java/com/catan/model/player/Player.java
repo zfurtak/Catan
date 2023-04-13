@@ -10,16 +10,18 @@ import lombok.Setter;
 @Table(name = "Player")
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class Player {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter @Setter private int id;
+    private int id;
 
-    @Getter @Setter private String username;
+    private String username;
 
-    @Getter @Setter private String password;
+    private String password;
 
-    @Getter @Setter private int points;
+    private int points;
 
 }

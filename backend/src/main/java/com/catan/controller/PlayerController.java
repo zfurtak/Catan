@@ -32,5 +32,10 @@ public class PlayerController {
         return ResponseEntity.created(new URI("/player/" + savedPlayer.getId())).body(savedPlayer);
     }
 
+    //TODO
+    // update points
+    // log in
+    // get player by username and password
+    // send error messages when player logs in with wrong credentials + add custom exceptions
 
 }
