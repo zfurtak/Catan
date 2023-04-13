@@ -13,6 +13,9 @@ import java.util.List;
 @Setter
 public class Game {
 
+    //TODO
+    // remove gameId
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
