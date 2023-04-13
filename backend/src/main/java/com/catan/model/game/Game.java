@@ -7,26 +7,27 @@ import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Getter
 @Setter
 public class Game {
 
     //TODO
-    // remove gameId
+    // change gameId to Singleton
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private List<Player> players;
-    private final int phaseTimeLimit;
-    private final int requiredVictoryPoints;
     private Player currentPlayer;
     private Phase currentPhase;
+    private Random random = new Random();
 
     public Game(int phaseTimeLimit, int requiredVictoryPoints) {
-        this.phaseTimeLimit = phaseTimeLimit;
-        this.requiredVictoryPoints = requiredVictoryPoints;
+        this.players = new ArrayList<>();
+        currentPlayer = players.get(random.nextInt(4));
     }
 }

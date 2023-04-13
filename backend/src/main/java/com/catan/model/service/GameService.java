@@ -1,5 +1,6 @@
-package com.catan.model.game;
+package com.catan.model.service;
 
+import com.catan.model.game.Game;
 import com.catan.model.player.Player;
 import org.springframework.stereotype.Service;
 
