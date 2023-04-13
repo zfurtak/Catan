@@ -5,6 +5,7 @@ import com.catan.model.repository.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -18,9 +19,8 @@ public class PlayerServiceImpl implements PlayerService{
     }
 
     @Override
-    public Optional<Player> getSpecificPlayer() {
-//        playerRepository.findOne();
-        return null;
+    public Optional<Player> getSpecificPlayer(String username) {
+        return Optional.of(playerRepository.findByUsername(username));
     }
 
     @Override
@@ -29,7 +29,10 @@ public class PlayerServiceImpl implements PlayerService{
     }
 
     @Override
-    public void updatePoints(Integer points) {
-
+    public void updatePoints(Player player) {
+        if(playerRepository.findById(player.getId()).isPresent()){
+            Player playerDB = playerRepository.findById(player.getId()).get();
+            playerDB.setPoints(player.getPoints());
+        }
     }
 }
