@@ -26,10 +26,11 @@ public class PlayerController {
 
     @PostMapping
     //TODO
-    // check what exception shoould be thrown
+    // check what exception should be thrown
     public ResponseEntity createPlayer(@RequestBody Player player) throws URISyntaxException {
         Player savedPlayer = playerRepository.save(player);
         return ResponseEntity.created(new URI("/player/" + savedPlayer.getId())).body(savedPlayer);
     }
+
 
 }
