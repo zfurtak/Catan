@@ -6,9 +6,14 @@ import java.util.Optional;
 
 public interface PlayerService {
 
-    Optional<Player> getSpecificPlayer(String username);
+    Player getPlayerByName(String username);
 
-    void addPlayer(Player player);
+    Player getPlayerById(int id);
 
-    void updatePoints(Player player);
+    Player logPlayerIn(String username, String password);
+
+    Player addPlayer(Player player);
+
+    Player updatePoints(Player player, int points);
+    Player updatePoints(int id, int points);
 }

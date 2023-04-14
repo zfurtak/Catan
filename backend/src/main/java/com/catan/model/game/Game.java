@@ -26,8 +26,10 @@ public class Game {
     private Phase currentPhase;
     private Random random = new Random();
 
-    public Game(int phaseTimeLimit, int requiredVictoryPoints) {
+    public Game() {
         this.players = new ArrayList<>();
         currentPlayer = players.get(random.nextInt(4));
     }
+
+
 }
