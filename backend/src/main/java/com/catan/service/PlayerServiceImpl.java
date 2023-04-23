@@ -1,9 +1,9 @@
-package com.catan.model.service;
+package com.catan.service;
 
-import com.catan.model.exceptions.PasswordIncorrectException;
-import com.catan.model.exceptions.PlayerNotFoundException;
-import com.catan.model.player.Player;
-import com.catan.model.repository.PlayerRepository;
+import com.catan.exceptions.PasswordIncorrectException;
+import com.catan.exceptions.PlayerNotFoundException;
+import com.catan.model.Player;
+import com.catan.repository.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

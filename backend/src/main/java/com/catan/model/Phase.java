@@ -1,4 +1,4 @@
-package com.catan.model.game;
+package com.catan.model;
 
 public enum Phase {
     GETTING_RESOURCES,

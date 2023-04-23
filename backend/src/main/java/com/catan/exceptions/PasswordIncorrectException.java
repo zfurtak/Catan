@@ -1,4 +1,4 @@
-package com.catan.model.exceptions;
+package com.catan.exceptions;
 
 public class PasswordIncorrectException extends RuntimeException{
     public PasswordIncorrectException(String errorMessage){
