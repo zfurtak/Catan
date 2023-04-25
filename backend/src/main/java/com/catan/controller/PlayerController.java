@@ -37,11 +37,11 @@ public class PlayerController {
         return playerService.getPlayerById(id);
     }
 
-    @GetMapping()
-    public Player logPlayer(@RequestBody String username,
-                            @RequestBody String password) {
-        return playerService.logPlayerIn(username, password);
-    }
+//    @GetMapping()
+//    public Player logPlayer(@RequestBody String username,
+//                            @RequestBody String password) {
+//        return playerService.logPlayerIn(username, password);
+//    }
 
     @PostMapping
     //TODO
@@ -57,9 +57,5 @@ public class PlayerController {
         return playerService.updatePoints(id, points);
     }
 
-    //TODO
-    // update points
-    // get player by username and password
-    // send error messages when player logs in with wrong credentials + add custom exceptions
 
 }
