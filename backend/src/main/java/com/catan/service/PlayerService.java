@@ -1,17 +1,46 @@
 package com.catan.service;
 
+import com.catan.exceptions.PasswordIncorrectException;
+import com.catan.exceptions.PlayerNotFoundException;
 import com.catan.model.Player;
+import com.catan.repository.PlayerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-public interface PlayerService {
+import java.util.Optional;
 
-    Player getPlayerByName(String username);
+@Service
+public class PlayerService {
 
-    Player getPlayerById(int id);
+    private final PlayerRepository playerRepository;
 
-    Player logPlayerIn(String username, String password);
+    @Autowired
+    public PlayerService(PlayerRepository playerRepository){
+        this.playerRepository = playerRepository;
+    }
 
-    Player addPlayer(Player player);
 
-    Player updatePoints(Player player, int points);
-    Player updatePoints(int id, int points);
+
+    public Player getPlayerById(int id){
+        Optional<Player> playerDB = playerRepository.findById(id);
+        if(playerDB.isEmpty()){
+            throw new PlayerNotFoundException("Player not found");
+        }else{
+            return playerDB.get();
+        }
+    }
+
+    public Player addPlayer(Player player) {
+        return playerRepository.save(player);
+    }
+
+    public Player updateVictoryPoints(Player player, int points) {
+        player.setVictoryPoints(points);
+        this.playerRepository.save(player);
+        return player;
+    }
+
+    public Player updatePoints(int id, int points){
+        return updateVictoryPoints(this.getPlayerById(id), points);
+    }
 }
