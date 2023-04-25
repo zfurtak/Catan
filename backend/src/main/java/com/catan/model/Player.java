@@ -1,6 +1,4 @@
-package com.catan.model.player;
-import com.catan.model.card.ResourcesCard;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+package com.catan.model;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.Transient;
 import lombok.AllArgsConstructor;
@@ -8,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -23,17 +20,14 @@ public class Player {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String username;
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 
-    private String password;
-
-    private int points;
-
-    @Transient
+    private Color color;
     private int victoryPoints;
-
-//    Jest problem ze lista nie moze byc polem w bazie danych
-//    @Transient
-//    private List<ResourcesCard> resourcesCards = new ArrayList<>();
-
+    private int numberOfRoads;
+    private int numberOfVillages;
+    private int numberOfCities;
+    // TODO: czy mozemy przechowywac w playerze liste kart
 }

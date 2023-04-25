@@ -1,10 +1,7 @@
 package com.catan.controller;
 
-import com.catan.model.exceptions.PlayerNotFoundException;
-import com.catan.model.player.Player;
-import com.catan.model.repository.PlayerRepository;
-import com.catan.model.service.PlayerService;
-import org.apache.el.stream.Optional;
+import com.catan.model.Player;
+import com.catan.service.PlayerService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

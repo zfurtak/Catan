@@ -1,8 +1,6 @@
-package com.catan.model.service;
+package com.catan.service;
 
-import com.catan.model.player.Player;
-
-import java.util.Optional;
+import com.catan.model.Player;
 
 public interface PlayerService {
 

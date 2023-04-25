@@ -1,5 +1,5 @@
-package com.catan.model.repository;
-import com.catan.model.player.Player;
+package com.catan.repository;
+import com.catan.model.Player;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 
