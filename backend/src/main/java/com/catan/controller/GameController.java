@@ -15,21 +15,17 @@ public class GameController {
         this.gameService = gameService;
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Game createGame(@RequestBody Player initialPlayer){
-        return gameService.createGame(initialPlayer);
-    }
 
-    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Game joinNewPlayer(@PathVariable int id,
-                           @RequestBody Player player) {
-        return gameService.joinNewPlayer(id, player);
-
+    @PutMapping(value = "/joinGame/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Game joinNewPlayer(@PathVariable int id) {
+        return gameService.joinGame(id);
     }
 
     @DeleteMapping("/{id}")
     public void deleteGame(@PathVariable int id){
         gameService.deleteGameById(id);
     }
+
+
 
 }

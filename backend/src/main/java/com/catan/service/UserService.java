@@ -2,6 +2,7 @@ package com.catan.service;
 
 import com.catan.exceptions.PasswordIncorrectException;
 import com.catan.exceptions.UserNotFoundException;
+import com.catan.model.Game;
 import com.catan.model.Player;
 import com.catan.model.User;
 import com.catan.repository.UserRepository;
@@ -13,10 +14,13 @@ import java.util.Optional;
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    private final PlayerService playerService;
 
     @Autowired
-    public UserService(UserRepository userRepository){
+    public UserService(UserRepository userRepository,
+                       PlayerService playerService){
         this.userRepository = userRepository;
+        this.playerService = playerService;
     }
 
     public User getUserByName(String username) {
@@ -52,4 +56,5 @@ public class UserService {
         user.setRankingPoints(rankingPoints);
         return this.userRepository.save(user);
     }
+
 }

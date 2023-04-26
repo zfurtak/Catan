@@ -6,4 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 @Repository
-public interface PlayerRepository extends JpaRepository<Player, Integer>{}
+public interface PlayerRepository extends JpaRepository<Player, Integer>{
+
+    public Optional<Player> findByUserId(int user_id);
+}
