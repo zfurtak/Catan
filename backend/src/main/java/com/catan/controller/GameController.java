@@ -16,16 +16,15 @@ public class GameController {
     }
 
 
-    @PutMapping(value = "/joinGame/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Game joinNewPlayer(@PathVariable int id) {
-        return gameService.joinGame(id);
+    @PutMapping(value = "/joinGame/{userId}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Game joinNewPlayer(@PathVariable int userId) {
+        return gameService.joinGame(userId);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteGame(@PathVariable int id){
-        gameService.deleteGameById(id);
+    @PutMapping(value = "/{userId}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Game rollTheDice(@PathVariable int userId){
+        return gameService.rollTheDice(userId);
     }
-
 
 
 }

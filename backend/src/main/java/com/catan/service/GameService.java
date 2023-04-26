@@ -1,16 +1,13 @@
 package com.catan.service;
 
 import com.catan.exceptions.TooManyPlayersException;
-import com.catan.exceptions.UserNotFoundException;
 import com.catan.model.Game;
 import com.catan.model.Player;
 import com.catan.model.User;
 import com.catan.repository.GameRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class GameService {
@@ -24,6 +21,12 @@ public class GameService {
         this.gameRepository = gameRepository;
         this.playerService = playerService;
         this.userService = userService;
+    }
+
+
+    public Game rollTheDice(int userId){
+        return null;
+        // TODO: not yet implemented
     }
 
     public Game joinGame(int userId){

@@ -16,18 +16,7 @@ public class PlayerController {
         this.playerService = playerService;
     }
 
-//    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity createPlayer(@RequestBody Player player) throws URISyntaxException {
-//        Player savedPlayer = playerService.addPlayer(player);
-//        return ResponseEntity.created(new URI("/player/" + savedPlayer.getId())).body(savedPlayer);
-//    }
-
-//    @PutMapping("/{id}")
-//    public Player updatePlayerVictoryPoints(@PathVariable int id, @RequestBody int points){
-//        return playerService.updateVictoryPoints(id, points);
-//    }
-
-
-
+    // GET - makeTradeOffer (listOfItems)
+    // PUT - confirmTrade - we have current player id in Game
 
 }
