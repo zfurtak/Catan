@@ -21,7 +21,5 @@ public class PlayerResourceCards {
     @JoinColumn(name = "player_id", referencedColumnName = "id")
     private Player player;
 
-    @ManyToOne
-    @JoinColumn(name = "resource_card_id", referencedColumnName = "id")
-    private ResourceCard resourceCard;
+    private Resource resource;
 }

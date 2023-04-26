@@ -37,11 +37,12 @@ public class UserService {
         }
     }
 
+    // TODO : add hashing to the password
     public User logUserIn(String username, String password){
         User userDB = this.getUserByName(username);
         if(password.equals(userDB.getPassword())){
             return userDB;
-        }else{
+        } else{
             throw new PasswordIncorrectException("Password is incorrect");
         }
     }
