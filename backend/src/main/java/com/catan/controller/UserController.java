@@ -2,13 +2,11 @@ package com.catan.controller;
 
 import com.catan.model.User;
 import com.catan.service.UserService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping( value = "/users")
 public class UserController {
     private final UserService userService;
 
@@ -16,10 +14,15 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping()
+    @GetMapping(value = "", produces = {MediaType.APPLICATION_JSON_VALUE})
     public User logUser(@RequestBody String username,
                         @RequestBody String password) {
         return userService.logUserIn(username, password);
+    }
+
+    @GetMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public User getUser(@PathVariable int id){
+        return userService.getUserById(id);
     }
 
 

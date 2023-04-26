@@ -1,7 +1,7 @@
 package com.catan.service;
 
-import com.catan.exceptions.PasswordIncorrectException;
-import com.catan.exceptions.PlayerNotFoundException;
+import com.catan.exceptions.UserNotFoundException;
+import com.catan.model.Game;
 import com.catan.model.Player;
 import com.catan.repository.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +19,10 @@ public class PlayerService {
         this.playerRepository = playerRepository;
     }
 
-
-
     public Player getPlayerById(int id){
         Optional<Player> playerDB = playerRepository.findById(id);
         if(playerDB.isEmpty()){
-            throw new PlayerNotFoundException("Player not found");
+            throw new UserNotFoundException("Player not found");
         }else{
             return playerDB.get();
         }
@@ -34,13 +32,14 @@ public class PlayerService {
         return playerRepository.save(player);
     }
 
+
     public Player updateVictoryPoints(Player player, int points) {
         player.setVictoryPoints(points);
         this.playerRepository.save(player);
         return player;
     }
 
-    public Player updatePoints(int id, int points){
+    public Player updateVictoryPoints(int id, int points){
         return updateVictoryPoints(this.getPlayerById(id), points);
     }
 }
