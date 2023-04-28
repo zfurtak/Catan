@@ -7,23 +7,24 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "Road")
+@Table(name = "PlayerResourceCards")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class Road {
+public class PlayerResourceCard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @ManyToOne
-    @JoinColumn(name="player_id", referencedColumnName = "id")
+    @JoinColumn(name = "player_id", referencedColumnName = "id")
     private Player player;
 
-    @ManyToOne
-    @JoinColumn(name="edge_id", referencedColumnName = "id")
-    private FieldEdge fieldEdge;
+    private Resource resource;
 
-    private int roadLength;
+    public PlayerResourceCard(Player player, Resource resource){
+        this.player = player;
+        this.resource = resource;
+    }
 }

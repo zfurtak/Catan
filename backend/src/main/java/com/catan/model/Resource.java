@@ -5,5 +5,6 @@ public enum Resource {
     BRICK,
     WOOL,
     WHEAT,
-    STONE
+    STONE,
+    DESSERT
 }

@@ -1,10 +1,8 @@
 package com.catan.service;
 
-import com.catan.exceptions.PlayerAlreadyExistsExceptions;
 import com.catan.exceptions.UserNotFoundException;
-import com.catan.model.Game;
-import com.catan.model.Player;
-import com.catan.model.User;
+import com.catan.model.*;
+import com.catan.model.board.BuildingType;
 import com.catan.repository.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,7 +49,13 @@ public class PlayerService {
         return player;
     }
 
+
+
     public Player updateVictoryPoints(int id, int points){
         return updateVictoryPoints(this.getPlayerById(id), points);
+    }
+
+    public void deletePlayers(){
+        playerRepository.deleteAll();
     }
 }

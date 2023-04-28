@@ -1,14 +1,13 @@
 package com.catan.model;
 
+import com.catan.model.board.Field;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 @Entity
 @Table(name = "Game")
@@ -22,10 +21,6 @@ public class Game {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToOne
-    @JoinColumn(name = "board_id", referencedColumnName = "id")
-    private Board board;
-
     private int numberOfPlayers;
 
     @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
@@ -37,7 +32,22 @@ public class Game {
 
     @OneToOne
     @JoinColumn(name = "current_player_id", referencedColumnName = "id")
+    // ja bym to pole popierdolila bo i tak bedziemy id gracza przekazywac
+    // do przemyślenia
     private Player currentPlayer;
 
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
+    @JoinColumn(name="field_id", referencedColumnName = "id")
+    private List<Field> fields;
+
     private Phase currentPhase;
+
+    public Game(List<Player> players, List<Field> fields){
+        this.players = players;
+        this.fields = fields;
+        this.numberOfPlayers = 1;
+        this.knightCardsTaken = 0;
+        this.pointCardsTaken = 0;
+        this.currentPhase = Phase.BUILDING;
+    }
 }

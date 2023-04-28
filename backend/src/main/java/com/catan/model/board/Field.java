@@ -1,5 +1,6 @@
-package com.catan.model;
+package com.catan.model.board;
 
+import com.catan.model.Resource;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,18 +15,18 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-public class BoardField {
+public class Field {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private Resource resource;
     private int diceNumber;
+    private boolean isBlocked;
 
     @OneToMany(orphanRemoval = true, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "field_edge_id", referencedColumnName = "id")
-    private List<FieldEdge> fieldEdges;
+    private List<Edge> edges;
 
     @OneToMany(orphanRemoval = true, cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "field_vertex_id", referencedColumnName = "id")
-    private List<FieldVertex> fieldVertices;
+    @JoinColumn(name = "vertex_id", referencedColumnName = "id")
+    private List<Vertex> vertices;
 }
