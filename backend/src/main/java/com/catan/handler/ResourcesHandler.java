@@ -15,26 +15,16 @@ import java.util.List;
 @Component
 public class ResourcesHandler {
 
-    private final GameService gameService;
     private final FieldService fieldService;
-    private final VertexService vertexService;
-    private final PlayerService playerService;
     private final PlayerResourceCardService playerResourceCardService;
 
-    public ResourcesHandler(GameService gameService,
-                            FieldService fieldService,
-                            VertexService vertexService,
-                            PlayerService playerService,
+    public ResourcesHandler(FieldService fieldService,
                             PlayerResourceCardService playerResourceCardService){
-        this.gameService = gameService;
         this.fieldService = fieldService;
-        this.vertexService = vertexService;
-        this.playerService = playerService;
         this.playerResourceCardService = playerResourceCardService;
     }
 
-    public Game distributeResources(int diceNumber){
-        Game game = gameService.getGame();
+    public void distributeResources(int diceNumber){
         List<Field> chosenFields = this.fieldService.findAllByDiceNumber(diceNumber);
         for(Field field: chosenFields){
             if(!field.isBlocked()){
@@ -47,7 +37,6 @@ public class ResourcesHandler {
                 }
             }
         }
-        return game;
     }
 
     public void getResourceForPlayer(Player player, Resource resource, BuildingType buildingType){

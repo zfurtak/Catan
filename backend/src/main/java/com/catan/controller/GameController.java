@@ -3,7 +3,9 @@ package com.catan.controller;
 import com.catan.handler.ResourcesHandler;
 import com.catan.model.Game;
 import com.catan.service.GameService;
+import org.hibernate.mapping.Any;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -25,8 +27,9 @@ public class GameController {
     }
 
     @PutMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Game distributeResources(@RequestBody int diceNumber){
-        return resourcesHandler.distributeResources(diceNumber);
+    public ResponseEntity<Void> distributeResources(@RequestBody int diceNumber){
+        resourcesHandler.distributeResources(diceNumber);
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping(value = "/{userId}/thief", consumes = MediaType.APPLICATION_JSON_VALUE)
