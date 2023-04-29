@@ -39,16 +39,12 @@ Further information: https://www.catan.com/sites/default/files/2021-06/catan_bas
     - ************road -************ connects villages/cities, because village can be built only if is connected to another village/city
     - **************************************develompment card -************************************** gives extra points, resources or knight, who can move the thief
 
-## Multiplayer implementation
-
-- Firstly, we will implement a game, that allows playing woth other people locally on one computer
-- Eventually, if there is enough time and human resources, we will extend it to playing on the internet
 
 ## Technology used (expected)
 
 - Java - for backend, game’s logic
-- Javascript with frameworks - for frontend, interface
-- MongoDB - database used to save users’ profiles
+- Typescript with frameworks - for frontend, interface
+- SQL database - for storing game information
 - Coding style: [https://google.github.io/styleguide/javaguide.html](https://google.github.io/styleguide/javaguide.html)
 
 ## Team:
