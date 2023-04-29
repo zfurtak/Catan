@@ -1,13 +1,13 @@
 package com.catan.handler;
 
-import com.catan.model.Game;
 import com.catan.model.Player;
 import com.catan.model.Resource;
 import com.catan.model.board.Building;
 import com.catan.model.board.BuildingType;
 import com.catan.model.board.Field;
 import com.catan.model.board.Vertex;
-import com.catan.service.*;
+import com.catan.service.FieldService;
+import com.catan.service.PlayerResourceCardService;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
