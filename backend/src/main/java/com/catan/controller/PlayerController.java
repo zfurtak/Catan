@@ -1,7 +1,5 @@
 package com.catan.controller;
 
-import com.catan.model.Game;
-import com.catan.model.Player;
 import com.catan.service.PlayerService;
 import org.springframework.web.bind.annotation.*;
 

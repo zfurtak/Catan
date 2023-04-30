@@ -5,6 +5,7 @@ import com.catan.model.User;
 import com.catan.service.GameService;
 import com.catan.service.UserService;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,6 +19,14 @@ public class UserController {
         this.userService = userService;
         this.gameService = gameService;
     }
+
+
+    @PostMapping(value="", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<User> registryUser(@RequestBody String username,
+                                       @RequestBody String password){
+        return ResponseEntity.ok(userService.registryUser(username, password));
+    }
+
 
     @GetMapping(value = "", produces = {MediaType.APPLICATION_JSON_VALUE})
     public User logUser(@RequestBody String username,

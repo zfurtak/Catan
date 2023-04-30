@@ -1,6 +1,7 @@
 package com.catan.service;
 
 import com.catan.exceptions.PasswordIncorrectException;
+import com.catan.exceptions.UserAlreadyExistsException;
 import com.catan.exceptions.UserNotFoundException;
 import com.catan.model.Game;
 import com.catan.model.Player;
@@ -50,6 +51,16 @@ public class UserService {
             throw new PasswordIncorrectException("Password is incorrect");
         }
     }
+
+    public User registryUser(String username, String password){
+        if(this.userRepository.findByUsername(username).isEmpty()){
+            User newUser = new User(username, password);
+            return this.userRepository.save(newUser);
+        }else{
+            throw new UserAlreadyExistsException("Cannot registry a user that is already in the database");
+        }
+    }
+
 
     public User updateRankingPoints(Player player, int rankingPoints){
         User user = player.getUser();

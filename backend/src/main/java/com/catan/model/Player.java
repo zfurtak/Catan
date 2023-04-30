@@ -29,5 +29,4 @@ public class Player {
     private int numberOfRoads;
     private int numberOfVillages;
     private int numberOfCities;
-    // TODO: czy mozemy przechowywac w playerze liste kart
 }
