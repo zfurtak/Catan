@@ -1,6 +1,7 @@
 package com.catan.model;
 
 import com.catan.model.board.Field;
+import com.catan.model.Phase;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
