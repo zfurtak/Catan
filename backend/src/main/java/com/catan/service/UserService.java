@@ -90,6 +90,7 @@ public class UserService {
             throw new UserNotFoundException("User not found");
         } else {
             User updatedUser = oldUserDB.get();
+            // TODO: check if we want to be able to change username/password
             updatedUser.setUsername(newUser.getUsername());
             updatedUser.setPassword(hashPassword(newUser.getPassword()));
             updatedUser.setRankingPoints(newUser.getRankingPoints());

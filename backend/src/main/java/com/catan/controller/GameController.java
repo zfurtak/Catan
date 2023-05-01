@@ -2,6 +2,7 @@ package com.catan.controller;
 
 import com.catan.handler.ResourcesHandler;
 import com.catan.model.Game;
+import com.catan.model.board.Field;
 import com.catan.service.GameService;
 import org.hibernate.mapping.Any;
 import org.springframework.http.MediaType;
@@ -33,8 +34,8 @@ public class GameController {
     }
 
     @PutMapping(value = "/{userId}/thief", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Game thief(@PathVariable int userId){
-        return gameService.thief(userId);
+    public Game thief(@PathVariable int userId, @RequestBody Field field){
+        return gameService.thief(userId, field);
     }
 
 

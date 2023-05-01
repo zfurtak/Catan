@@ -49,7 +49,7 @@ public class UserController {
         return userService.getUserById(id);
     }
 
-    @PostMapping(value = "/joinGame/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/joinGame/{id}", consumes = {MediaType.APPLICATION_JSON_VALUE})
     public Game joinNewPlayer(@PathVariable int id) {
         return gameService.joinGame(id);
     }
@@ -58,7 +58,7 @@ public class UserController {
         return userService.deleteUserById(id);
     }
 
-    @PostMapping(value = "/updateUserById/{id}")
+    @PutMapping(value = "/updateUserById/{id}", consumes = {MediaType.APPLICATION_JSON_VALUE})
     public User updateUserById(@PathVariable int id, @RequestBody User user){
         return userService.updateUserById(id, user);
     }
