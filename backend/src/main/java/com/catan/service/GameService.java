@@ -5,27 +5,34 @@ import com.catan.exceptions.TooManyPlayersException;
 import com.catan.model.*;
 import com.catan.model.board.BoardGenerator;
 import com.catan.model.board.Field;
+import com.catan.repository.FieldRepository;
 import com.catan.repository.GameRepository;
 import com.catan.repository.PlayerResourceCardRepository;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class GameService {
     private final GameRepository gameRepository;
     private final PlayerResourceCardRepository playerResourceCardRepository;
+    private final FieldRepository fieldRepository;
     private final PlayerService playerService;
     private final UserService userService;
 
     @Autowired
     public GameService(GameRepository gameRepository,
                        PlayerResourceCardRepository playerResourceCardRepository,
-                       PlayerService playerService,
+                       FieldRepository fieldRepository, PlayerService playerService,
                        UserService userService){
         this.gameRepository = gameRepository;
         this.playerResourceCardRepository = playerResourceCardRepository;
+        this.fieldRepository = fieldRepository;
         this.playerService = playerService;
         this.userService = userService;
     }
@@ -52,16 +59,6 @@ public class GameService {
         } else{
             return games.get(0);
         }
-    }
-
-    // TODO: change return value to a Map
-    public List<Resource> getPlayerResources(int playerId){
-        List<Resource> resources = new ArrayList<>();
-        List<PlayerResourceCard> resourceCards = playerResourceCardRepository.findByPlayerIDAllResourceCards(playerId);
-        for (PlayerResourceCard r : resourceCards){
-            resources.add(r.getResource());
-        }
-        return resources;
     }
 
     //TODO: create fields + set good diceNumber to good field (int whichField)
@@ -108,9 +105,15 @@ public class GameService {
         }
 
         // TODO: add query to get id of the blocked field (previous field with thief)
+        Field oldThiefField = fieldRepository.findAll().stream().filter(Field::isBlocked).toList().get(0);
+        oldThiefField.setBlocked(false);
+        fieldRepository.save(oldThiefField);
 
-        // TODO: put thief on the field chosen by player
-        field.setBlocked(true);
+        // TODO: Check if this is correct -> put thief on the field chosen by player
+        // should work, idk
+        Field newThiefField = fieldRepository.findById(field.getId());
+        newThiefField.setBlocked(true);
+        fieldRepository.save(newThiefField);
 
         return game;
     }

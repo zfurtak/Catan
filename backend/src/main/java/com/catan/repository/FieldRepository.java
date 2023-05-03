@@ -8,4 +8,5 @@ import java.util.List;
 public interface FieldRepository extends JpaRepository<Field, Integer> {
 
     public List<Field> findAllByDiceNumber(int number);
+    public Field findById(int fieldId);
 }
