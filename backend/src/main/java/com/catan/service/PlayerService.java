@@ -56,7 +56,7 @@ public class PlayerService {
     }
 
     public Map<Resource, Integer> getPlayerResources(int playerId){
-        List<PlayerResourceCard> resourceCards = playerResourceCardRepository.findByPlayerIDAllResourceCards(playerId);
+        List<PlayerResourceCard> resourceCards = playerResourceCardRepository.findAllByPlayerId(playerId);
         Map<Resource, Integer> playerResources = new HashMap<>();
         for (PlayerResourceCard resource : resourceCards){
             if(playerResources.containsKey(resource.getResource())){

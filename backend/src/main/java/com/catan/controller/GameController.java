@@ -1,6 +1,7 @@
 package com.catan.controller;
 
 import com.catan.handler.ResourcesHandler;
+import com.catan.handler.ThiefHandler;
 import com.catan.model.Game;
 import com.catan.model.board.Field;
 import com.catan.service.GameService;
@@ -14,10 +15,13 @@ import org.springframework.web.bind.annotation.*;
 public class GameController {
     private final GameService gameService;
     private final ResourcesHandler resourcesHandler;
+    private final ThiefHandler thiefHandler;
 
     public GameController(GameService gameService,
-                          ResourcesHandler resourcesHandler){
+                          ResourcesHandler resourcesHandler,
+                          ThiefHandler thiefHandler){
         this.gameService = gameService;
+        this.thiefHandler = thiefHandler;
         this.resourcesHandler = resourcesHandler;
     }
 
@@ -35,7 +39,7 @@ public class GameController {
 
     @PutMapping(value = "/{userId}/thief", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Game thief(@PathVariable int userId, @RequestBody Field field){
-        return gameService.thief(userId, field);
+        return thiefHandler.thief(userId, field);
     }
 
 

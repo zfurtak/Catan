@@ -20,19 +20,14 @@ import java.util.stream.Collectors;
 @Service
 public class GameService {
     private final GameRepository gameRepository;
-    private final PlayerResourceCardRepository playerResourceCardRepository;
-    private final FieldRepository fieldRepository;
     private final PlayerService playerService;
     private final UserService userService;
 
     @Autowired
     public GameService(GameRepository gameRepository,
-                       PlayerResourceCardRepository playerResourceCardRepository,
-                       FieldRepository fieldRepository, PlayerService playerService,
+                       PlayerService playerService,
                        UserService userService){
         this.gameRepository = gameRepository;
-        this.playerResourceCardRepository = playerResourceCardRepository;
-        this.fieldRepository = fieldRepository;
         this.playerService = playerService;
         this.userService = userService;
     }
@@ -86,35 +81,4 @@ public class GameService {
         playerService.deletePlayers();
     }
 
-    // TODO : everything that is happening connected to the thief
-    public Game thief(int userId, Field field){
-        Game game = this.getGame();
-
-        for (Player player : game.getPlayers()){
-            // check if this is the correct id, in player table we have two different ids rn
-            List<PlayerResourceCard> playerCards = playerResourceCardRepository.findByPlayerIDAllResourceCards(player.getId());
-            if(playerCards.size() > 7) {
-                // for now we randomly remove half of player cards
-                int numberOfCardsToRemove = playerCards.size()/2;
-                while (numberOfCardsToRemove > 0){
-                    int idToRemove = playerCards.get(0).getId();
-                    playerResourceCardRepository.deleteById(idToRemove);
-                    numberOfCardsToRemove--;
-                }
-            }
-        }
-
-        // TODO: add query to get id of the blocked field (previous field with thief)
-        Field oldThiefField = fieldRepository.findAll().stream().filter(Field::isBlocked).toList().get(0);
-        oldThiefField.setBlocked(false);
-        fieldRepository.save(oldThiefField);
-
-        // TODO: Check if this is correct -> put thief on the field chosen by player
-        // should work, idk
-        Field newThiefField = fieldRepository.findById(field.getId());
-        newThiefField.setBlocked(true);
-        fieldRepository.save(newThiefField);
-
-        return game;
-    }
 }

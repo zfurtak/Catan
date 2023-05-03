@@ -19,4 +19,19 @@ public class FieldService {
     public List<Field> findAllByDiceNumber(int number){
         return this.fieldRepository.findAllByDiceNumber(number);
     }
+
+    public void unlockPrevThief(){
+        Field oldThiefField = fieldRepository.findAll().stream().filter(Field::isBlocked).toList().get(0);
+        oldThiefField.setBlocked(false);
+        fieldRepository.save(oldThiefField);
+    }
+
+    public void blockNewThief(Field field){
+        // TODO: Check if this is correct -> put thief on the field chosen by player
+        // should work, idk
+        Field newThiefField = fieldRepository.findById(field.getId());
+        newThiefField.setBlocked(true);
+        fieldRepository.save(newThiefField);
+    }
+
 }
