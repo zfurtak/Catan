@@ -1,5 +1,6 @@
 package com.catan.controller;
 
+import com.catan.dto.TradeWithBankDTO;
 import com.catan.handler.ResourcesHandler;
 import com.catan.handler.ThiefHandler;
 import com.catan.model.Game;
@@ -42,5 +43,9 @@ public class GameController {
         return thiefHandler.thief(userId, field);
     }
 
-
+    @PutMapping(value="tradeWithBank/{userId}")
+    public Game tradeWithBank(@PathVariable int userId,
+                              @RequestBody TradeWithBankDTO tradeWithBankDTO) {
+        return gameService.tradeWithBank(userId, tradeWithBankDTO);
+    }
 }

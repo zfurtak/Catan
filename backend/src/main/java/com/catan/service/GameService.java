@@ -1,5 +1,6 @@
 package com.catan.service;
 
+import com.catan.dto.TradeWithBankDTO;
 import com.catan.exceptions.GameNotFoundException;
 import com.catan.exceptions.TooManyPlayersException;
 import com.catan.model.*;
@@ -81,4 +82,18 @@ public class GameService {
         playerService.deletePlayers();
     }
 
+    public Game tradeWithBank(int userId, TradeWithBankDTO tradeWithBankDTO) {
+        Map<Resource, Integer> playerResources = playerService.getPlayerResources(userId);
+
+        Resource resourceToTake = tradeWithBankDTO.getResourceFromPlayer();
+        Resource resourceToPut = tradeWithBankDTO.getResourceFromBank();
+        Integer numResourcesPlayer = playerResources.get(resourceToTake);
+
+        if(numResourcesPlayer != null && numResourcesPlayer > 0) {
+            playerResources.put(resourceToTake, --numResourcesPlayer);
+            playerResources.put(resourceToPut, playerResources.getOrDefault(resourceToPut, 0) + 1);
+        }
+
+        return getGame();
+    }
 }
