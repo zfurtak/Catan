@@ -33,7 +33,7 @@ public class UserController {
         return ResponseEntity.ok(userService.registerUser(username, password));
     }
 
-    @GetMapping(value = "/logIn", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @PostMapping(value = "/logIn", produces = {MediaType.APPLICATION_JSON_VALUE})
     public User logUser(@RequestBody User user) {
         String username = user.getUsername();
         String password = user.getPassword();
