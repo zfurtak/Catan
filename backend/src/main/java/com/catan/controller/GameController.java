@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController("/game")
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
 public class GameController {
     private final GameService gameService;
     private final ResourcesHandler resourcesHandler;

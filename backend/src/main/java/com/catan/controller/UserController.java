@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping( value = "/users")
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
 public class UserController {
     private final UserService userService;
     private final GameService gameService;
