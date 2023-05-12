@@ -4,6 +4,7 @@ import com.catan.model.Game;
 import com.catan.model.User;
 import com.catan.service.GameService;
 import com.catan.service.UserService;
+import io.swagger.annotations.SwaggerDefinition;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

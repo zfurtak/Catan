@@ -65,6 +65,8 @@ public class PlayerService {
                 playerResources.put(resource.getResource(), 1);
             }
         }
+        //        Map<Resource, Integer> playerResources = resourceCards.stream()
+        //                .collect(Collectors.toMap(PlayerResourceCard::getResource, PlayerResourceCard::getId));
         return playerResources;
     }
 
