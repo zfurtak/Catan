@@ -16,7 +16,10 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/users")
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST})
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 public class UserController {
