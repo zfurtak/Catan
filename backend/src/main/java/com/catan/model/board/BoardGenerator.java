@@ -10,6 +10,7 @@ public final class BoardGenerator {
     private static final int NUM_OF_FIELDS = 19;
     private static final int NUM_OF_EDGES = 72;
     private static final int NUM_OF_VERTICES = 54;
+
     public BoardGenerator(){
 
     }
@@ -33,9 +34,38 @@ public final class BoardGenerator {
                         edges.get(3), edges.get(4), edges.get(5))),
                 new ArrayList<>(List.of(vertices.get(0), vertices.get(1), vertices.get(2),
                         vertices.get(3), vertices.get(4), vertices.get(5)))));
-
+        // Lo que he toqueteado es de aqui para abajo
         // here create every field like the example above
-        fields.add(new Field(1, Resource.WHEAT, 2, false, new ArrayList<>(), new ArrayList<>()));
+        fields.add(new Field(1, Resource.WHEAT, 2, false,
+                new ArrayList<>(List.of(edges.get(0), edges.get(1), edges.get(2),
+                        edges.get(3), edges.get(4), edges.get(5))),
+                new ArrayList<>(List.of(vertices.get(0), vertices.get(1), vertices.get(2),
+                        vertices.get(3), vertices.get(4), vertices.get(5)))));
+
+        fields.add(new Field(2, Resource.DESSERT, 3, false,
+                new ArrayList<>(List.of(edges.get(0), edges.get(1), edges.get(2),
+                        edges.get(3), edges.get(4), edges.get(5))),
+                new ArrayList<>(List.of(vertices.get(0), vertices.get(1), vertices.get(2),
+                        vertices.get(3), vertices.get(4), vertices.get(5)))));
+
+        fields.add(new Field(3, Resource.WOOL, 5, false,
+                new ArrayList<>(List.of(edges.get(0), edges.get(1), edges.get(2),
+                        edges.get(3), edges.get(4), edges.get(5))),
+                new ArrayList<>(List.of(vertices.get(0), vertices.get(1), vertices.get(2),
+                        vertices.get(3), vertices.get(4), vertices.get(5)))));
+
+        fields.add(new Field(4, Resource.BRICK, 4, false,
+                new ArrayList<>(List.of(edges.get(0), edges.get(1), edges.get(2),
+                        edges.get(3), edges.get(4), edges.get(5))),
+                new ArrayList<>(List.of(vertices.get(0), vertices.get(1), vertices.get(2),
+                        vertices.get(3), vertices.get(4), vertices.get(5)))));
+
+        fields.add(new Field(5, Resource.WOOD, 8, false,
+                new ArrayList<>(List.of(edges.get(0), edges.get(1), edges.get(2),
+                        edges.get(3), edges.get(4), edges.get(5))),
+                new ArrayList<>(List.of(vertices.get(0), vertices.get(1), vertices.get(2),
+                        vertices.get(3), vertices.get(4), vertices.get(5)))));
+
 
 
 
