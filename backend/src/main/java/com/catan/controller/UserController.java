@@ -15,7 +15,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/users")
+<<<<<<< Updated upstream
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST})
+=======
+>>>>>>> Stashed changes
 public class UserController {
     private final UserService userService;
     private final GameService gameService;

@@ -21,18 +21,24 @@ public class PlayerResourceCardService {
         this.playerResourceCardRepository.save(playerResourceCard);
     }
 
+<<<<<<< Updated upstream
     public List<PlayerResourceCard> findAllCardsByPlayerId(int playerId){
         return playerResourceCardRepository.findAllByPlayerId(playerId);
     }
 
+=======
+>>>>>>> Stashed changes
     public List<PlayerResourceCard> getPlayersCardNumber(Player player) {
         return playerResourceCardRepository.findAllByPlayerId(player.getId());
     }
 
+<<<<<<< Updated upstream
     public void deleteByPlayerIdAndResource(int playerId, Resource resource){
         this.playerResourceCardRepository.deleteByPlayerIdAndResource(playerId, resource);
     }
 
+=======
+>>>>>>> Stashed changes
     public void deleteById(int id) {
         this.playerResourceCardRepository.deleteById(id);
     }
