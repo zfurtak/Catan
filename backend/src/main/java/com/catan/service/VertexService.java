@@ -16,4 +16,8 @@ public class VertexService {
         this.vertexRepository = vertexRepository;
     }
 
+    public Vertex saveVertex(Vertex vertex){
+        return vertexRepository.save(vertex);
+    }
+
 }

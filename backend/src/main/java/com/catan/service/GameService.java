@@ -92,6 +92,7 @@ public class GameService {
         if(resourceFromPlayer.equals(resourceFromBank)){
             throw new BadTradingException();
         }
+
         playerService.updateCardsAfterTradingWithBank(playerId, resourceFromPlayer, resourceFromBank);
         return this.getGame();
     }
