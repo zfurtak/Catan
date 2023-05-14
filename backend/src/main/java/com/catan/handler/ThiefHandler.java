@@ -20,7 +20,7 @@ public class ThiefHandler {
     public ThiefHandler(GameService gameService,
                         PlayerService playerService,
                         FieldService fieldService,
-                        PlayerResourceCardService playerResourceCardService){
+                        PlayerResourceCardService playerResourceCardService) {
         this.gameService = gameService;
         this.playerService = playerService;
         this.fieldService = fieldService;
@@ -30,15 +30,15 @@ public class ThiefHandler {
 
     //TODO: current player can steal(random card) from player among those who have villages/cities in the chosen field
 
-    public Game thief(int userId, Field field){
+    public Game thief(int userId, Field field) {
         Game game = this.gameService.getGame();
 
-        for (Player player : game.getPlayers()){
+        for (Player player : game.getPlayers()) {
             List<PlayerResourceCard> playerCards = this.playerResourceCardService.getPlayersCardNumber(player);
-            if(playerCards.size() > 7) {
+            if (playerCards.size() > 7) {
                 // for now we randomly remove half of player cards
-                int numberOfCardsToRemove = playerCards.size()/2;
-                while (numberOfCardsToRemove > 0){
+                int numberOfCardsToRemove = playerCards.size() / 2;
+                while (numberOfCardsToRemove > 0) {
                     int idToRemove = playerCards.get(0).getId();
                     this.playerResourceCardService.deleteById(idToRemove);
                     numberOfCardsToRemove--;

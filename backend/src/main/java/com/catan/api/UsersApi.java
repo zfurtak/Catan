@@ -1,6 +1,5 @@
 package com.catan.api;
 
-import com.catan.exceptions.ErrorDto;
 import com.catan.model.User;
 
 import io.swagger.annotations.Api;

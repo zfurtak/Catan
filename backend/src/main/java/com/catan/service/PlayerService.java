@@ -3,43 +3,39 @@ package com.catan.service;
 import com.catan.exceptions.UserNotFoundException;
 import com.catan.model.*;
 import com.catan.repository.PlayerRepository;
-import com.catan.repository.PlayerResourceCardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collectors;
+import java.util.*;
 
 @Service
 public class PlayerService {
 
     private final PlayerRepository playerRepository;
-    private final PlayerResourceCardRepository playerResourceCardRepository;
+    private final PlayerResourceCardService playerResourceCardService;
 
 
     @Autowired
-    public PlayerService(PlayerRepository playerRepository, PlayerResourceCardRepository playerResourceCardRepository){
+    public PlayerService(PlayerRepository playerRepository,
+                         PlayerResourceCardService playerResourceCardService) {
         this.playerRepository = playerRepository;
-        this.playerResourceCardRepository = playerResourceCardRepository;
+        this.playerResourceCardService = playerResourceCardService;
     }
 
-    public Player getPlayerById(int id){
+    public Player getPlayerById(int id) {
         Optional<Player> playerDB = playerRepository.findById(id);
-        if(playerDB.isEmpty()){
+        if (playerDB.isEmpty()) {
             throw new UserNotFoundException("Player not found");
-        }else{
+        } else {
             return playerDB.get();
         }
     }
 
-    public Player getPlayerByUserId(int userId){
+    public Player getPlayerByUserId(int userId) {
         Optional<Player> playerDB = playerRepository.findByUserId(userId);
-        if(playerDB.isEmpty()){
+        if (playerDB.isEmpty()) {
             throw new UserNotFoundException("Player not found");
-        }else{
+        } else {
             return playerDB.get();
         }
     }
@@ -55,26 +51,40 @@ public class PlayerService {
         return player;
     }
 
-    public Map<Resource, Integer> getPlayerResources(int playerId){
-        List<PlayerResourceCard> resourceCards = playerResourceCardRepository.findAllByPlayerId(playerId);
+    public Map<Resource, Integer> getPlayerResources(int playerId) {
+        List<PlayerResourceCard> resourceCards = playerResourceCardService.findAllCardsByPlayerId(playerId);
         Map<Resource, Integer> playerResources = new HashMap<>();
-        for (PlayerResourceCard resource : resourceCards){
-            if(playerResources.containsKey(resource.getResource())){
-                playerResources.put(resource.getResource(), playerResources.get(resource.getResource())+1);
+        for (PlayerResourceCard resourceCard : resourceCards) {
+            Resource resource = resourceCard.getResource();
+            if (playerResources.containsKey(resource)) {
+                playerResources.put(resource, playerResources.get(resource) + 1);
             } else {
-                playerResources.put(resource.getResource(), 1);
+                playerResources.put(resource, 1);
             }
         }
-        //        Map<Resource, Integer> playerResources = resourceCards.stream()
-        //                .collect(Collectors.toMap(PlayerResourceCard::getResource, PlayerResourceCard::getId));
         return playerResources;
     }
 
-    public Player updateVictoryPoints(int id, int points){
+    public List<Integer> getResourcesToTradeWithBank(int playerId){
+        return this.getPlayerResources(playerId).entrySet()
+                .stream()
+                    .filter(x -> x.getValue() >= 4)
+                    .map(x -> x.getKey().ordinal())
+                        .toList();
+    }
+
+    public void updateCardsAfterTradingWithBank(int playerId, Resource resourceFromPlayer, Resource resourceFromBank){
+        for(int i = 0; i < 4; i++)
+            playerResourceCardService.deleteByPlayerIdAndResource(playerId, resourceFromPlayer);
+        Player playerDB = this.getPlayerById(playerId);
+        playerResourceCardService.addCard(playerDB, resourceFromBank);
+    }
+
+    public Player updateVictoryPoints(int id, int points) {
         return updateVictoryPoints(this.getPlayerById(id), points);
     }
 
-    public void deletePlayers(){
+    public void deletePlayers() {
         playerRepository.deleteAll();
     }
 }

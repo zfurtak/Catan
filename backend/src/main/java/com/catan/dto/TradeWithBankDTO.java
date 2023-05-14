@@ -1,5 +1,6 @@
 package com.catan.dto;
 
+import com.catan.exceptions.BadResourceNumberException;
 import com.catan.model.Resource;
 
 public class TradeWithBankDTO {
@@ -11,21 +12,20 @@ public class TradeWithBankDTO {
         this.resourceFromPlayer = resourceFromPlayer;
     }
 
-    public Resource getResourceFromPlayer() {
+    public Resource convertPlayerResourceFromInt() {
         return resourceWithOrdinal(resourceFromPlayer);
     }
 
-    public Resource getResourceFromBank() {
+    public Resource convertBankResourceFromInt() {
         return resourceWithOrdinal(resourceFromBank);
     }
 
     private Resource resourceWithOrdinal(int ordinal) {
-        Resource res = null;
-        for(Resource resource : Resource.values()) {
-            if(resource.ordinal() == ordinal) {
-                res = resource;
+        for (Resource resource : Resource.values()) {
+            if (resource.ordinal() == ordinal) {
+                return resource;
             }
         }
-        return res;
+        throw new BadResourceNumberException();
     }
 }

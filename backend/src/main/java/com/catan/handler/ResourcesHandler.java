@@ -19,18 +19,18 @@ public class ResourcesHandler {
     private final PlayerResourceCardService playerResourceCardService;
 
     public ResourcesHandler(FieldService fieldService,
-                            PlayerResourceCardService playerResourceCardService){
+                            PlayerResourceCardService playerResourceCardService) {
         this.fieldService = fieldService;
         this.playerResourceCardService = playerResourceCardService;
     }
 
-    public void distributeResources(int diceNumber){
+    public void distributeResources(int diceNumber) {
         List<Field> chosenFields = this.fieldService.findAllByDiceNumber(diceNumber);
-        for(Field field: chosenFields){
-            if(!field.isBlocked()){
+        for (Field field : chosenFields) {
+            if (!field.isBlocked()) {
                 List<Vertex> vertices = field.getVertices();
-                for(Vertex v: vertices){
-                    if(v.getBuilding() != null) {
+                for (Vertex v : vertices) {
+                    if (v.getBuilding() != null) {
                         Building building = v.getBuilding();
                         getResourceForPlayer(building.getPlayer(), field.getResource(), building.getType());
                     }
@@ -39,8 +39,8 @@ public class ResourcesHandler {
         }
     }
 
-    public void getResourceForPlayer(Player player, Resource resource, BuildingType buildingType){
-        if(buildingType == BuildingType.CITY){
+    public void getResourceForPlayer(Player player, Resource resource, BuildingType buildingType) {
+        if (buildingType == BuildingType.CITY) {
             playerResourceCardService.addCard(player, resource);
         }
         playerResourceCardService.addCard(player, resource);

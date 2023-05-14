@@ -10,4 +10,5 @@ public interface PlayerRepository extends JpaRepository<Player, Integer>{
 
     Optional<Player> findByUserId(int user_id);
 
+
 }

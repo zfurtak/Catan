@@ -12,20 +12,28 @@ import java.util.List;
 public class PlayerResourceCardService {
     private final PlayerResourceCardRepository playerResourceCardRepository;
 
-    public PlayerResourceCardService(PlayerResourceCardRepository playerResourceCardRepository){
+    public PlayerResourceCardService(PlayerResourceCardRepository playerResourceCardRepository) {
         this.playerResourceCardRepository = playerResourceCardRepository;
     }
 
-    public void addCard(Player player, Resource resource){
+    public void addCard(Player player, Resource resource) {
         PlayerResourceCard playerResourceCard = new PlayerResourceCard(player, resource);
         this.playerResourceCardRepository.save(playerResourceCard);
     }
 
-    public List<PlayerResourceCard> getPlayersCardNumber(Player player){
+    public List<PlayerResourceCard> findAllCardsByPlayerId(int playerId){
+        return playerResourceCardRepository.findAllByPlayerId(playerId);
+    }
+
+    public List<PlayerResourceCard> getPlayersCardNumber(Player player) {
         return playerResourceCardRepository.findAllByPlayerId(player.getId());
     }
 
-    public void deleteById(int id){
+    public void deleteByPlayerIdAndResource(int playerId, Resource resource){
+        this.playerResourceCardRepository.deleteByPlayerIdAndResource(playerId, resource);
+    }
+
+    public void deleteById(int id) {
         this.playerResourceCardRepository.deleteById(id);
     }
 }
