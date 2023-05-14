@@ -17,7 +17,6 @@ public class Edge {
     private int id;
 
     private boolean isEmpty;
-    private int whichEdge;
 
     @OneToOne
     @JoinColumn(name="road_id", referencedColumnName = "id")

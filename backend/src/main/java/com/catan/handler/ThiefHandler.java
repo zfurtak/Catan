@@ -4,7 +4,6 @@ import com.catan.model.Game;
 import com.catan.model.Player;
 import com.catan.model.PlayerResourceCard;
 import com.catan.model.board.Field;
-import com.catan.repository.GameRepository;
 import com.catan.service.*;
 import org.springframework.stereotype.Component;
 

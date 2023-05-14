@@ -22,11 +22,11 @@ public class Field {
     private int diceNumber;
     private boolean isBlocked;
 
-    @OneToMany(orphanRemoval = true, cascade = CascadeType.REMOVE)
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
     @JoinColumn(name = "field_edge_id", referencedColumnName = "id")
     private List<Edge> edges;
 
-    @OneToMany(orphanRemoval = true, cascade = CascadeType.REMOVE)
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
     @JoinColumn(name = "vertex_id", referencedColumnName = "id")
     private List<Vertex> vertices;
 }

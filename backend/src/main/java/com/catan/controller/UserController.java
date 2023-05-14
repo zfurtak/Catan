@@ -22,7 +22,13 @@ import java.util.List;
         @ApiResponse(responseCode = "401", description = "Unauthorized"),
         @ApiResponse(responseCode = "500", description = "Internal Server Error")})
 @RequestMapping(value = "/users")
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST})
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 public class UserController {
     private final UserService userService;
     private final GameService gameService;
