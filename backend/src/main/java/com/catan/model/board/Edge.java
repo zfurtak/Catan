@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "FieldEdge")
+@Table(name = "Edge")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

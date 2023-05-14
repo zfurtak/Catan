@@ -10,7 +10,7 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity
-@Table(name = "BoardField")
+@Table(name = "Field")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

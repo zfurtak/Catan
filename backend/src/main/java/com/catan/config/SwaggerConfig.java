@@ -1,29 +1,23 @@
 package com.catan.config;
-import io.swagger.annotations.License;
-import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.Paths;
 import io.swagger.v3.oas.models.info.Info;
 import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
-import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
-@Configuration
-@EnableSwagger2
+//@Configuration
+//@EnableSwagger2
 public class SwaggerConfig {
 
-    @Bean
-    public GroupedOpenApi api(){
-        return GroupedOpenApi.builder()
-                .group("OpenApiController")
-                .packagesToScan("com.catan.api")
-                .build();
-    }
+//    @Bean
+//    public GroupedOpenApi api(){
+//        return GroupedOpenApi.builder()
+//                .group("UserApi")
+//                .packagesToScan("com.catan")
+//                .pathsToMatch(String.valueOf(PathSelectors.any()))
+//                .build();
+//    }
 
 //    @Bean
 //    public Docket api() {
@@ -37,11 +31,11 @@ public class SwaggerConfig {
 //                .build();
 //    }
 
-    @Bean
-    public OpenAPI springShopOpenAPI() {
-        return new OpenAPI()
-                .info(new Info().title("SpringShop API")
-                        .description("Spring shop sample application")
-                        .version("2.0.4"));
-    }
+//    @Bean
+//    public OpenAPI springShopOpenAPI() {
+//        return new OpenAPI()
+//                .info(new Info().title("SpringShop API")
+//                        .description(String.valueOf(PathSelectors.any()))
+//                        .version("2.0.4"));
+//    }
 }

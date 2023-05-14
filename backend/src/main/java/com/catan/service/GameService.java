@@ -96,4 +96,20 @@ public class GameService {
         playerService.updateCardsAfterTradingWithBank(playerId, resourceFromPlayer, resourceFromBank);
         return this.getGame();
     }
+
+    // exception thrown if player has no resources
+    // choose resources to offer
+    // choose resources to get in return
+    // send trade offer
+    // wait for other players to accept/decline offer
+    // if anyone accepted finish trade
+    // if everyone declined finish trade
+    // else wait (if timeout then finish trade)
+    // return updated game
+    public Game tradeWithPlayer(int playerId) {
+
+
+        return getGame();
+    }
+
 }
