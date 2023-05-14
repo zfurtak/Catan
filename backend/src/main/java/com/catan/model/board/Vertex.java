@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "FieldVertex")
+@Table(name = "Vertex")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
