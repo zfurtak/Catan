@@ -4,16 +4,23 @@ import com.catan.model.Game;
 import com.catan.model.User;
 import com.catan.service.GameService;
 import com.catan.service.UserService;
-import io.swagger.annotations.SwaggerDefinition;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
+// SWAGGER url: http://localhost:8080/swagger-ui/index.html
 @RestController
+@Tag(name = "User", description = "User")
+@ApiResponses(value = {
+        @ApiResponse(responseCode = "400", description = "Bad request"),
+        @ApiResponse(responseCode = "401", description = "Unauthorized"),
+        @ApiResponse(responseCode = "500", description = "Internal Server Error")})
 @RequestMapping(value = "/users")
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST})
 public class UserController {
@@ -28,6 +35,7 @@ public class UserController {
 
 
     @PostMapping(value = "/addUser", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "", description = "Creates user if username and password are valid.")
     public ResponseEntity<User> registerUser(@RequestBody User user) {
         String username = user.getUsername();
         String password = user.getPassword();
