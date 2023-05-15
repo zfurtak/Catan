@@ -82,7 +82,7 @@ public final class BoardGenerator {
                         edges.get(37), edges.get(48), edges.get(32))),
                 new ArrayList<>(List.of(vertices.get(14), vertices.get(19), vertices.get(28),
                         vertices.get(29), vertices.get(24), vertices.get(15)))));
-        // Dessert blocked in the beginning 
+        // Dessert blocked in the beginning
         fields.add(new Field(9, Resource.DESSERT, -1, true, //S
                 new ArrayList<>(List.of(edges.get(22), edges.get(26), edges.get(38),
                         edges.get(39), edges.get(40), edges.get(36))),
