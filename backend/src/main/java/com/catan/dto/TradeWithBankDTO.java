@@ -22,10 +22,10 @@ public class TradeWithBankDTO {
 
     private Resource resourceWithOrdinal(int ordinal) {
         for (Resource resource : Resource.values()) {
-            if (resource.ordinal() == ordinal) {
+            if(resource.ordinal() == ordinal) {
                 return resource;
             }
         }
-        throw new BadResourceNumberException();
+        throw new BadResourceNumberException("No resource with ordinal " + ordinal);
     }
 }
