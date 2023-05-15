@@ -42,15 +42,15 @@ public class GameController {
         this.resourcesHandler = resourcesHandler;
     }
 
-    @PutMapping(value = "/joinGame/{userId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "", description = "Updates the game with a new player if the user is " +
                                            "already registered and the game is not full")
+    @PutMapping(value = "/joinGame/{userId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Game joinNewPlayer(@PathVariable int userId) {
         return gameService.joinGame(userId);
     }
 
-    @PutMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "", description = "Distributes resources among the different players of the game")
+    @PutMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> distributeResources(@RequestBody int diceNumber) {
         resourcesHandler.distributeResources(diceNumber);
         return ResponseEntity.ok().build();
@@ -61,16 +61,16 @@ public class GameController {
         return thiefHandler.thief(userId, field);
     }
 
-    @GetMapping(value = "tradeWithBank/{userId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "", description = "Returns a List of the resources that the player currently has")
+    @GetMapping(value = "tradeWithBank/{userId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public List<Integer> getResourcesToTradeWithBank(@PathVariable int userId) {
         return gameService.getResourcesToTradeWithBank(userId);
     }
 
 
-    @PutMapping(value = "tradeWithBank/{playerId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "", description = "Perfoms the resource trade between the player and the bank " +
                                            "if the player has the needed resource")
+    @PutMapping(value = "tradeWithBank/{playerId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Game tradeWithBank(@PathVariable int playerId,
                               @RequestBody TradeWithBankDTO tradeWithBankDTO){
         return gameService.tradeWithBank(playerId, tradeWithBankDTO);
