@@ -20,7 +20,12 @@ import java.util.List;
 @ApiResponses(value = {
         @ApiResponse(responseCode = "400", description = "Bad request"),
         @ApiResponse(responseCode = "401", description = "Unauthorized"),
+        @ApiResponse(responseCode = "403", description = "Forbidden"),
+        @ApiResponse(responseCode = "404", description = "Not Found"),
+        @ApiResponse(responseCode = "405", description = "Method not allowed"),
+        @ApiResponse(responseCode = "409", description = "Conflict"),
         @ApiResponse(responseCode = "500", description = "Internal Server Error")})
+
 @RequestMapping(value = "/users")
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST})
 public class UserController {

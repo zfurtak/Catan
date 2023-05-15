@@ -6,6 +6,9 @@ import com.catan.handler.ThiefHandler;
 import com.catan.model.Game;
 import com.catan.model.board.Field;
 import com.catan.service.GameService;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +17,16 @@ import java.util.List;
 
 
 @RestController("/game")
+@Tag(name = "Game", description = "Game")
+@ApiResponses(value = {
+        @ApiResponse(responseCode = "400", description = "Bad request"),
+        @ApiResponse(responseCode = "401", description = "Unauthorized"),
+        @ApiResponse(responseCode = "403", description = "Forbidden"),
+        @ApiResponse(responseCode = "404", description = "Not Found"),
+        @ApiResponse(responseCode = "405", description = "Method not allowed"),
+        @ApiResponse(responseCode = "409", description = "Conflict"),
+        @ApiResponse(responseCode = "500", description = "Internal Server Error")})
+
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST})
 public class GameController {
     private final GameService gameService;
