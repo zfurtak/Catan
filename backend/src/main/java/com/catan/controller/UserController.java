@@ -8,7 +8,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -62,28 +61,22 @@ public class UserController {
         return ResponseEntity.ok(userService.getALlUsers());
     }
 
-    @GetMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @GetMapping(value = "/{userId}", produces = {MediaType.APPLICATION_JSON_VALUE})
     @Operation(summary = "", description = "Returns user if is already registered.")
-    public User getUser(@PathVariable int id) {
-        return userService.getUserById(id);
+    public User getUser(@PathVariable int userId) {
+        return userService.getUserById(userId);
     }
 
-    @PostMapping(value = "/joinGame/{id}", consumes = {MediaType.APPLICATION_JSON_VALUE})
-    @Operation(summary = "", description = "Adds player to the game with user id if is already " +
-                                           "registered and the game is not full.")
-    public Game joinNewPlayer(@PathVariable int id) {
-        return gameService.joinGame(id);
-    }
 
-    @DeleteMapping(value = "/deleteUserById/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @DeleteMapping(value = "/deleteUserById/{userId}", produces = {MediaType.APPLICATION_JSON_VALUE})
     @Operation(summary = "", description = "Deletes user from the database if is already registered.")
-    public User deleteUserById(@PathVariable int id) {
-        return userService.deleteUserById(id);
+    public User deleteUserById(@PathVariable int userId) {
+        return userService.deleteUserById(userId);
     }
 
-    @PutMapping(value = "/updateUserById/{id}", consumes = {MediaType.APPLICATION_JSON_VALUE})
+    @PutMapping(value = "/updateUserById/{userId}", consumes = {MediaType.APPLICATION_JSON_VALUE})
     @Operation(summary = "", description = "Updates user's attributes if is already registered.")
-    public User updateUserById(@PathVariable int id, @RequestBody User user) {
-        return userService.updateUserById(id, user);
+    public User updateUserById(@PathVariable int userId, @RequestBody User user) {
+        return userService.updateUserById(userId, user);
     }
 }

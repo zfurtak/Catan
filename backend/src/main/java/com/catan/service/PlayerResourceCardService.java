@@ -29,7 +29,6 @@ public class PlayerResourceCardService {
         return playerResourceCardRepository.findAllByPlayerId(player.getId());
     }
 
-
     public void deleteByPlayerIdAndResource(int playerId, Resource resource){
         this.playerResourceCardRepository.deleteByPlayerIdAndResource(playerId, resource);
     }

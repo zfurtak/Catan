@@ -1,6 +1,6 @@
 package com.catan.controller;
 
-import com.catan.dto.TradeWithBankDTO;
+import com.catan.dto.TradingDTO;
 import com.catan.handler.ResourcesHandler;
 import com.catan.handler.ThiefHandler;
 import com.catan.model.Game;
@@ -42,10 +42,10 @@ public class GameController {
         this.resourcesHandler = resourcesHandler;
     }
 
-    @Operation(summary = "", description = "Updates the game with a new player if the user is " +
-                                           "already registered and the game is not full")
+    @Operation(summary = "", description = "If user is the first to join the game, game is created, otherwise"+
+        "existing, waiting game is updated with new player (player is a temporary object for user during the game")
     @PutMapping(value = "/joinGame/{userId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Game joinNewPlayer(@PathVariable int userId) {
+    public Game joinToTheGame(@PathVariable int userId) {
         return gameService.joinGame(userId);
     }
 
@@ -56,9 +56,9 @@ public class GameController {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping(value = "/{userId}/thief", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Game thief(@PathVariable int userId, @RequestBody Field field) {
-        return thiefHandler.thief(userId, field);
+    @PutMapping(value = "/{playerId}/thief", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Game thief(@PathVariable int playerId, @RequestBody Field field) {
+        return thiefHandler.thief(playerId, field);
     }
 
     @Operation(summary = "", description = "Returns a List of the resources that the player currently has")
@@ -72,7 +72,16 @@ public class GameController {
                                            "if the player has the needed resource")
     @PutMapping(value = "tradeWithBank/{playerId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Game tradeWithBank(@PathVariable int playerId,
-                              @RequestBody TradeWithBankDTO tradeWithBankDTO){
-        return gameService.tradeWithBank(playerId, tradeWithBankDTO);
+                              @RequestBody TradingDTO tradingDTO){
+        return gameService.tradeWithBank(playerId, tradingDTO);
+    }
+
+    @Operation(summary = "", description = "Perfoms the resource trade between two players " +
+            "with the resources that players have")
+    @PutMapping(value = "/tradeWithPlayer/{playerOfferingId}/{playerAcceptingId}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Game tradeWithPlayer(@PathVariable int playerOfferingId,
+                                @PathVariable int playerAcceptingId,
+                                @RequestBody TradingDTO tradingDTO){
+        return gameService.tradeWithPlayer(playerOfferingId, playerAcceptingId, tradingDTO);
     }
 }
