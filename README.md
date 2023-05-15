@@ -1,6 +1,7 @@
 # Catan
 
 The project is to implement computer version of Catan board game.
+This repository contains backend part of the project.
 
 ## Main rules
 
