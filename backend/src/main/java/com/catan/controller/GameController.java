@@ -28,7 +28,7 @@ public class GameController {
         this.resourcesHandler = resourcesHandler;
     }
 
-
+    
     @PutMapping(value = "/joinGame/{userId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Game joinNewPlayer(@PathVariable int userId) {
         return gameService.joinGame(userId);

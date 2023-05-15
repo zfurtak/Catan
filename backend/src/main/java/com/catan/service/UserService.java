@@ -60,7 +60,7 @@ public class UserService {
         User userDB = this.getUserByName(username);
         if(hashPassword(password).equals(userDB.getPassword())){
             return userDB;
-        } else{
+        } else {
             throw new PasswordIncorrectException("Password is incorrect");
         }
     }
