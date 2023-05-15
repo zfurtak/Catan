@@ -1,7 +1,13 @@
 package com.catan.exceptions;
 
 public class PlayerAlreadyExistsExceptions extends RuntimeException{
-    public PlayerAlreadyExistsExceptions(String errorMessage){
-        super(errorMessage);
+    private static final String AUTH_EXCEPTION_ERROR_CODE = "409";
+
+    public PlayerAlreadyExistsExceptions(String message) {
+        new PlayerAlreadyExistsExceptions(message, new Throwable(AUTH_EXCEPTION_ERROR_CODE));
+    }
+
+    public PlayerAlreadyExistsExceptions(String message, Throwable cause) {
+        super(message, cause);
     }
 }
