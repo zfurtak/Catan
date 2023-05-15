@@ -47,8 +47,8 @@ public class GameService {
     public Game getGame() {
         List<Game> games = gameRepository.findAll();
 
-        if (games.isEmpty()) {
-            throw new GameNotFoundException();
+        if(games.isEmpty()) {
+            throw new GameNotFoundException("Game not found");
         } else {
             return games.get(0);
         }
@@ -90,7 +90,7 @@ public class GameService {
 
         // exception thrown if player wants to trade for the same resource
         if(resourceFromPlayer.equals(resourceFromBank)){
-            throw new BadTradingException();
+            throw new BadTradingException("Trying to trade the same resource");
         }
 
         playerService.updateCardsAfterTradingWithBank(playerId, resourceFromPlayer, resourceFromBank);
