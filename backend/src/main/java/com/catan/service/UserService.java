@@ -3,6 +3,7 @@ package com.catan.service;
 import com.catan.exceptions.PasswordIncorrectException;
 import com.catan.exceptions.UserAlreadyExistsException;
 import com.catan.exceptions.UserNotFoundException;
+import com.catan.exceptions.UsernameTooShortException;
 import com.catan.model.Game;
 import com.catan.model.Player;
 import com.catan.model.User;
@@ -43,7 +44,7 @@ public class UserService {
         return Hashing.sha256().hashString(password, StandardCharsets.UTF_8).toString();
     }
 
-    public List<User> getALlUsers(){
+    public List<User> getAllUsers(){
         return new ArrayList<>(userRepository.findAll());
     }
 
@@ -66,12 +67,17 @@ public class UserService {
     }
 
     public User registerUser(String username, String password){
-        if(this.userRepository.findByUsername(username).isEmpty()){
-            User newUser = new User(username, hashPassword(password));
-            return this.userRepository.save(newUser);
-        }else{
-            throw new UserAlreadyExistsException("Cannot registry a user that is already in the database");
+        if(username.length() >= 4){
+            if(this.userRepository.findByUsername(username).isEmpty()){
+                User newUser = new User(username, hashPassword(password));
+                return this.userRepository.save(newUser);
+            }else{
+                throw new UserAlreadyExistsException("Cannot registry a user that is already in the database");
+            }
+        } else{
+            throw new UsernameTooShortException("Usarname provided is too short, it has less than 4 characters");
         }
+
     }
 
     public User deleteUserById(int id){

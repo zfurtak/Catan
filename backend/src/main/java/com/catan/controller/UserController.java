@@ -60,7 +60,7 @@ public class UserController {
     @GetMapping(value = "/getAllUsers", produces = {MediaType.APPLICATION_JSON_VALUE})
     @Operation(summary = "", description = "Returns a list of all the registered users.")
     public ResponseEntity<List<User>> getAllUsers() {
-        return ResponseEntity.ok(userService.getALlUsers());
+        return ResponseEntity.ok(userService.getAllUsers());
     }
 
 
