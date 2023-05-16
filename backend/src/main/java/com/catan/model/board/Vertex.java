@@ -18,12 +18,13 @@ public class Vertex {
     @Id
     private int id;
 
-    // TODO: czy rozpatrujemy wierzchołki jako jeden dla kilku fieldów czy każdy field ma swoje 6 wierzchołkow?
     @ManyToOne
     @JoinColumn(name = "building_id", referencedColumnName = "id")
     private Building building;
 
     @ManyToMany
-    @JoinTable()
+    @JoinTable(name = "connected_edges_vertex",
+               joinColumns = @JoinColumn(name = "vertex_id"),
+               inverseJoinColumns = @JoinColumn(name = "field_edge_id"))
     private List<Edge> edges;
 }

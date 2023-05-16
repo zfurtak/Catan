@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table(name = "Edge")
 @NoArgsConstructor
@@ -21,4 +23,7 @@ public class Edge {
     @OneToOne
     @JoinColumn(name="road_id", referencedColumnName = "id")
     private Road road;
+
+    @ManyToMany(mappedBy = "edges")
+    List<Vertex> verteces;
 }
