@@ -39,7 +39,7 @@ public class UserController {
     }
 
 
-    @PostMapping(value = "/addUser", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/registerUser", consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "", description = "Adds user to the database if username " +
                                            "and password are valid and is not already registered.")
     public ResponseEntity<User> registerUser(@RequestBody User user) {

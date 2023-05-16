@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table(name = "Edge")
 @NoArgsConstructor
@@ -18,11 +20,14 @@ public class Edge {
     private int id;
 
     @OneToOne
-    @JoinColumn(name="road_id", referencedColumnName = "id")
+    @JoinColumn(name = "road_id", referencedColumnName = "id")
     private Road road;
 
+    @ManyToMany(mappedBy = "edges")
+    List<Vertex> vertices;
 
-    public Color getColorOfEdge(){
-        return this.getRoad().getPlayer().getColor();
+    public Color getColorOfEdge() {
+        if (this.getRoad() != null) return this.getRoad().getPlayer().getColor();
+        return null;
     }
 }

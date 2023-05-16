@@ -1,8 +1,11 @@
 package com.catan.service;
 
+import com.catan.exceptions.UserNotFoundException;
+import com.catan.model.Player;
 import com.catan.model.board.Edge;
 import com.catan.repository.EdgeRepository;
 import org.springframework.stereotype.Service;
+
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
