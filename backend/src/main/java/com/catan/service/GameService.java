@@ -6,6 +6,7 @@ import com.catan.exceptions.GameNotFoundException;
 import com.catan.exceptions.TooManyPlayersException;
 import com.catan.model.*;
 import com.catan.model.board.BoardGenerator;
+import com.catan.model.board.Edge;
 import com.catan.model.board.Field;
 import com.catan.repository.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -121,10 +122,5 @@ public class GameService {
     }
 
 
-    // player sends us an edge where he wants to build
-    // we check if it is empty
-    // then we check if vertices
-    public Game buildRoad(int playerId){
-        return getGame();
-    }
+
 }

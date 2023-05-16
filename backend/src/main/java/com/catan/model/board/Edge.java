@@ -1,5 +1,6 @@
 package com.catan.model.board;
 
+import com.catan.model.Color;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,12 +19,15 @@ public class Edge {
     @Id
     private int id;
 
-    private boolean isEmpty;
-
     @OneToOne
-    @JoinColumn(name="road_id", referencedColumnName = "id")
+    @JoinColumn(name = "road_id", referencedColumnName = "id")
     private Road road;
 
     @ManyToMany(mappedBy = "edges")
     List<Vertex> verteces;
+
+    public Color getColorOfEdge() {
+        if (this.getRoad() != null) return this.getRoad().getPlayer().getColor();
+        return null;
+    }
 }

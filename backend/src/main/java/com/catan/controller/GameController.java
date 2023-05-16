@@ -1,9 +1,11 @@
 package com.catan.controller;
 
 import com.catan.dto.TradingDTO;
+import com.catan.handler.BuildHandler;
 import com.catan.handler.ResourcesHandler;
 import com.catan.handler.ThiefHandler;
 import com.catan.model.Game;
+import com.catan.model.board.Edge;
 import com.catan.model.board.Field;
 import com.catan.service.GameService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -33,13 +35,16 @@ public class GameController {
     private final GameService gameService;
     private final ResourcesHandler resourcesHandler;
     private final ThiefHandler thiefHandler;
+    private final BuildHandler buildHandler;
 
     public GameController(GameService gameService,
                           ResourcesHandler resourcesHandler,
-                          ThiefHandler thiefHandler) {
+                          ThiefHandler thiefHandler,
+                          BuildHandler buildHandler) {
         this.gameService = gameService;
         this.thiefHandler = thiefHandler;
         this.resourcesHandler = resourcesHandler;
+        this.buildHandler = buildHandler;
     }
 
     @Operation(summary = "", description = "If user is the first to join the game, game is created, otherwise"+
@@ -82,5 +87,11 @@ public class GameController {
                                 @PathVariable int playerAcceptingId,
                                 @RequestBody TradingDTO tradingDTO){
         return gameService.tradeWithPlayer(playerOfferingId, playerAcceptingId, tradingDTO);
+    }
+
+    @PutMapping(value="/buildRoad/{playerId}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Game buildRoad(@PathVariable int playerId,
+                          @RequestBody Edge edge){
+        return buildHandler.buildRoad(playerId, edge);
     }
 }

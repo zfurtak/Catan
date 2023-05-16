@@ -24,6 +24,4 @@ public class Road {
     private Player player;
 
     private int roadLength;
-
-    private Color color;
 }

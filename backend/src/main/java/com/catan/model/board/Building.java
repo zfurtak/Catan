@@ -24,6 +24,4 @@ public class Building {
     private Player player;
 
     private BuildingType type;
-
-    private Color color;
 }
