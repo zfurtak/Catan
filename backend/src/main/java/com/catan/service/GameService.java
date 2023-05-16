@@ -1,6 +1,6 @@
 package com.catan.service;
 
-import com.catan.dto.TradeWithBankDTO;
+import com.catan.dto.TradingDTO;
 import com.catan.exceptions.BadTradingException;
 import com.catan.exceptions.GameNotFoundException;
 import com.catan.exceptions.TooManyPlayersException;
@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class GameService {
@@ -54,8 +53,6 @@ public class GameService {
         }
     }
 
-    //TODO: create fields + set good diceNumber to good field (int whichField)
-    // BoardGenerator.java
     public Game createGame(Player initialPlayer) {
         List<Player> players = new ArrayList<>();
         List<Field> fields = BoardGenerator.generateFields();
@@ -84,9 +81,9 @@ public class GameService {
     }
 
     // we assume that player can exchange, because before we send list of available resources
-    public Game tradeWithBank(int playerId, TradeWithBankDTO tradeWithBankDTO){
-        Resource resourceFromPlayer = tradeWithBankDTO.convertPlayerResourceFromInt();
-        Resource resourceFromBank = tradeWithBankDTO.convertBankResourceFromInt();
+    public Game tradeWithBank(int playerId, TradingDTO tradingDTO){
+        Resource resourceFromPlayer = tradingDTO.convertPlayerResourceFromInt();
+        Resource resourceFromBank = tradingDTO.convertBankResourceFromInt();
 
         // exception thrown if player wants to trade for the same resource
         if(resourceFromPlayer.equals(resourceFromBank)){
@@ -106,10 +103,20 @@ public class GameService {
     // if everyone declined finish trade
     // else wait (if timeout then finish trade)
     // return updated game
-    public Game tradeWithPlayer(int playerId) {
+    // we assume that one of the players offered a trade deal and one of the other players accepted it
+    public Game tradeWithPlayer(int offeringPlayerId, int acceptingPlayerId, TradingDTO tradingDTO) {
+        Resource resourceToOffer = tradingDTO.convertResourceToOffer();
+        Resource resourceToGet = tradingDTO.convertResourceToGet();
+        int numOfResourcesToOffer = tradingDTO.getNumberOfResourcesOffered();
+        int numOfResourcesToGet = tradingDTO.getNumberOfResourcesToGet();
 
+        if(resourceToOffer.equals(resourceToGet)){
+            throw new BadTradingException("Trying to trade the same resource");
+        }
+
+        playerService.updateCardsAfterTradingWithPlayer(offeringPlayerId, acceptingPlayerId, resourceToOffer,
+                resourceToGet, numOfResourcesToOffer, numOfResourcesToGet);
 
         return getGame();
     }
-
 }

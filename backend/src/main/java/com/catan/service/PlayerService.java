@@ -83,6 +83,20 @@ public class PlayerService {
         playerResourceCardService.addCard(playerDB, resourceFromBank);
     }
 
+    public void updateCardsAfterTradingWithPlayer(int offeringPlayerId, int acceptingPlayerId, Resource resourceOffered,
+                                                  Resource resourceToGet, int numResourcesOffered, int numResourcesToGet){
+        Player offeringPlayerDB = getPlayerById(offeringPlayerId);
+        Player acceptingPlayerDB = getPlayerById(acceptingPlayerId);
+        for (int i=0; i<numResourcesOffered; i++){
+            playerResourceCardService.deleteByPlayerIdAndResource(offeringPlayerId, resourceOffered);
+            playerResourceCardService.addCard(acceptingPlayerDB, resourceOffered);
+        }
+        for (int i=0; i<numResourcesToGet; i++){
+            playerResourceCardService.deleteByPlayerIdAndResource(acceptingPlayerId, resourceToGet);
+            playerResourceCardService.addCard(offeringPlayerDB, resourceToGet);
+        }
+    }
+
 
     public Player updateVictoryPoints(int id, int points) {
         return updateVictoryPoints(this.getPlayerById(id), points);

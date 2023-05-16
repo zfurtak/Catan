@@ -32,3 +32,4 @@ build/
 ### VS Code ###
 .vscode/
 /database/catan_database.trace.db
+/database/catan_database.mv.db
