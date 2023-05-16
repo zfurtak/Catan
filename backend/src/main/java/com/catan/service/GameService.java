@@ -119,4 +119,12 @@ public class GameService {
 
         return getGame();
     }
+
+
+    // player sends us an edge where he wants to build
+    // we check if it is empty
+    // then we check if vertices
+    public Game buildRoad(){
+        return getGame();
+    }
 }

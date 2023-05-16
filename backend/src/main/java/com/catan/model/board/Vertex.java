@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table(name = "Vertex")
 @NoArgsConstructor
@@ -20,4 +22,8 @@ public class Vertex {
     @ManyToOne
     @JoinColumn(name = "building_id", referencedColumnName = "id")
     private Building building;
+
+    @ManyToMany
+    @JoinTable()
+    private List<Edge> edges;
 }

@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 // SWAGGER url: http://localhost:8080/swagger-ui/index.html
@@ -40,7 +41,7 @@ public class UserController {
 
     @PostMapping(value = "/addUser", consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "", description = "Adds user to the database if username " +
-                                           "and password are valid and is not already registered.")
+            "and password are valid and is not already registered.")
     public ResponseEntity<User> registerUser(@RequestBody User user) {
         String username = user.getUsername();
         String password = user.getPassword();
@@ -55,11 +56,13 @@ public class UserController {
         return userService.logUserIn(username, password);
     }
 
+
     @GetMapping(value = "/getAllUsers", produces = {MediaType.APPLICATION_JSON_VALUE})
     @Operation(summary = "", description = "Returns a list of all the registered users.")
     public ResponseEntity<List<User>> getAllUsers() {
         return ResponseEntity.ok(userService.getALlUsers());
     }
+
 
     @GetMapping(value = "/{userId}", produces = {MediaType.APPLICATION_JSON_VALUE})
     @Operation(summary = "", description = "Returns user if is already registered.")
@@ -73,6 +76,7 @@ public class UserController {
     public User deleteUserById(@PathVariable int userId) {
         return userService.deleteUserById(userId);
     }
+
 
     @PutMapping(value = "/updateUserById/{userId}", consumes = {MediaType.APPLICATION_JSON_VALUE})
     @Operation(summary = "", description = "Updates user's attributes if is already registered.")

@@ -67,7 +67,6 @@ public class GameController {
         return gameService.getResourcesToTradeWithBank(userId);
     }
 
-
     @Operation(summary = "", description = "Perfoms the resource trade between the player and the bank " +
                                            "if the player has the needed resource")
     @PutMapping(value = "tradeWithBank/{playerId}", consumes = MediaType.APPLICATION_JSON_VALUE)
