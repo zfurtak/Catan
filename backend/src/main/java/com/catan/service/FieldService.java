@@ -1,5 +1,6 @@
 package com.catan.service;
 
+import com.catan.model.board.Edge;
 import com.catan.model.board.Field;
 import com.catan.model.board.Vertex;
 import com.catan.repository.FieldRepository;
@@ -32,6 +33,10 @@ public class FieldService {
         Field newThiefField = fieldRepository.findById(field.getId());
         newThiefField.setBlocked(true);
         fieldRepository.save(newThiefField);
+    }
+
+    public List<Field> getFieldsByEdge(Edge edge){
+        return fieldRepository.findAllByEdgesContains(edge);
     }
 
 }
