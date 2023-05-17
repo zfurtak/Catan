@@ -7,6 +7,7 @@ import com.catan.handler.ThiefHandler;
 import com.catan.model.Game;
 import com.catan.model.board.Edge;
 import com.catan.model.board.Field;
+import com.catan.model.board.Vertex;
 import com.catan.service.GameService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -93,5 +94,17 @@ public class GameController {
     public Game buildRoad(@PathVariable int playerId,
                           @RequestBody Edge edge){
         return buildHandler.buildRoad(playerId, edge);
+    }
+
+    @PutMapping(value = "/buildVillage/{playerId}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Game buildVillage(@PathVariable int playerId,
+                             @RequestBody Vertex vertex) {
+        return buildHandler.buildVillage(playerId, vertex);
+    }
+
+    @PutMapping(value = "/buildCity/{playerId}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Game buildCity(@PathVariable int playerId,
+                             @RequestBody Vertex vertex) {
+        return buildHandler.buildCity(playerId, vertex);
     }
 }
