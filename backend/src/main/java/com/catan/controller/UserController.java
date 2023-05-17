@@ -27,7 +27,7 @@ import java.util.List;
         @ApiResponse(responseCode = "500", description = "Internal Server Error")})
 
 @RequestMapping(value = "/users")
-@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST})
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.OPTIONS})
 public class UserController {
     private final UserService userService;
     private final GameService gameService;
@@ -55,7 +55,6 @@ public class UserController {
         String password = user.getPassword();
         return userService.logUserIn(username, password);
     }
-
 
     @GetMapping(value = "/getAllUsers", produces = {MediaType.APPLICATION_JSON_VALUE})
     @Operation(summary = "", description = "Returns a list of all the registered users.")

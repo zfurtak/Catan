@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
-@RestController("/game")
+@RestController
 @Tag(name = "Game", description = "Game")
 @ApiResponses(value = {
         @ApiResponse(responseCode = "400", description = "Bad request"),
@@ -29,8 +29,8 @@ import java.util.List;
         @ApiResponse(responseCode = "405", description = "Method not allowed"),
         @ApiResponse(responseCode = "409", description = "Conflict"),
         @ApiResponse(responseCode = "500", description = "Internal Server Error")})
-
-@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST})
+@RequestMapping("/game")
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.OPTIONS})
 public class GameController {
     private final GameService gameService;
     private final ResourcesHandler resourcesHandler;
