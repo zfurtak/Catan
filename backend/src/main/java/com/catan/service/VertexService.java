@@ -6,6 +6,8 @@ import com.catan.model.board.Building;
 import com.catan.repository.VertexRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class VertexService {
@@ -19,5 +21,6 @@ public class VertexService {
     public Vertex saveVertex(Vertex vertex){
         return vertexRepository.save(vertex);
     }
+
 
 }
