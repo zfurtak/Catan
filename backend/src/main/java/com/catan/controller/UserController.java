@@ -27,7 +27,7 @@ import java.util.List;
         @ApiResponse(responseCode = "500", description = "Internal Server Error")})
 
 @RequestMapping(value = "/users")
-@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST})
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.OPTIONS})
 public class UserController {
     private final UserService userService;
     private final GameService gameService;
