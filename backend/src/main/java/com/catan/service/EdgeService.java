@@ -6,6 +6,7 @@ import com.catan.model.board.Edge;
 import com.catan.repository.EdgeRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -20,7 +21,7 @@ public class EdgeService {
     public Edge getEdge(int edgeId){
         Optional<Edge> edgeDB = edgeRepository.findById(edgeId);
         if (edgeDB.isEmpty()) {
-            throw new UserNotFoundException("Edge not found");
+            throw new NoSuchElementException("Edge not found");
         } else {
             return edgeDB.get();
         }

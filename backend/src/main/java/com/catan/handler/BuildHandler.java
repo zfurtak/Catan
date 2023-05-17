@@ -19,21 +19,25 @@ public class BuildHandler {
     private final FieldService fieldService;
     private final PlayerService playerService;
     private final EdgeService edgeService;
+    private final VertexService vertexService;
 
 
     public BuildHandler(GameService gameService,
                         FieldService fieldService,
                         PlayerService playerService,
-                        EdgeService edgeService){
+                        EdgeService edgeService,
+                        VertexService vertexService){
         this.gameService = gameService;
         this.fieldService = fieldService;
         this.playerService = playerService;
         this.edgeService = edgeService;
+        this.vertexService = vertexService;
     }
 
     // we cannot build a road if it doesn't have direct connection with road or building in the same color
     // or if the edge is already taken
     // TODO: needs to be tested
+    // TODO: checking the resources
     public Game buildRoad(int playerId, Edge edge){
         Edge edgeDB = edgeService.getEdge(edge.getId());
         if(edgeDB.getRoad() != null){
@@ -67,6 +71,13 @@ public class BuildHandler {
         throw new BuildingUnavailableException("You cannot build road here");
     }
 
-
+    // TODO: check if we have enough resources
+    public Game buildVillage(int playerId, Vertex vertex){
+        Vertex vertexDB = vertexService.getVertex(vertex);
+        if(vertexDB.getBuilding() != null){
+            throw new BuildingUnavailableException("There is already a building there");
+        }
+        return gameService.getGame();
+    }
 
 }
