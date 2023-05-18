@@ -46,7 +46,8 @@ class UserTest {
         assertEquals("user", user.getUsername());
     }
 
-    //register a new user in the database, get said user by its name and check that its password is the string transformed by the hashPassword method
+    //register a new user in the database, get said user by its name and
+    // check that its password is the string transformed by the hashPassword method
     @Test
     void newUserPassword(){
         control.registerUser("user", "pass");
