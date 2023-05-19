@@ -32,9 +32,8 @@ public class GameService {
 
     public Game joinGame(int userId) {
         User user = userService.getUserById(userId);
-        Player player = playerService.getPlayerByUserId(userId);
-        player.setUser(user);
         List<Game> games = gameRepository.findAll();
+        Player player = playerService.createPlayer(user, playerService.getColor(games.size()));
 
         if (games.isEmpty()) {
             return createGame(player);
@@ -42,6 +41,13 @@ public class GameService {
             Game game = games.get(0);
             return this.joinExistingGame(game, player);
         }
+    }
+    public Game createGame(Player initialPlayer) {
+        List<Player> players = new ArrayList<>();
+        List<Field> fields = BoardGenerator.generateFields();
+        players.add(initialPlayer);
+        Game newGame = new Game(players, fields);
+        return gameRepository.save(newGame);
     }
 
     public Game getGame() {
@@ -52,16 +58,6 @@ public class GameService {
         } else {
             return games.get(0);
         }
-    }
-
-    //TODO: create fields + set good diceNumber to good field (int whichField)
-    // BoardGenerator.java
-    public Game createGame(Player initialPlayer) {
-        List<Player> players = new ArrayList<>();
-        List<Field> fields = BoardGenerator.generateFields();
-        players.add(initialPlayer);
-        Game newGame = new Game(players, fields);
-        return gameRepository.save(newGame);
     }
 
     public Game joinExistingGame(Game game, Player newPlayer) {

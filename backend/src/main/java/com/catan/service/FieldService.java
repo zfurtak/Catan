@@ -39,4 +39,6 @@ public class FieldService {
         return fieldRepository.findAllByEdgesContains(edge);
     }
 
+    public List<Field> getFieldsByVertex(Vertex vertex) { return fieldRepository.findAllByVerticesContains(vertex); }
+
 }

@@ -31,12 +31,6 @@ public class Game {
     private int knightCardsTaken;
     private int pointCardsTaken;
 
-    @OneToOne
-    @JoinColumn(name = "current_player_id", referencedColumnName = "id")
-    // ja bym to pole popierdolila bo i tak bedziemy id gracza przekazywac
-    // do przemyślenia
-    private Player currentPlayer;
-
     @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
     @JoinColumn(name="field_id", referencedColumnName = "id")
     private List<Field> fields;

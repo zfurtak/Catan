@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class BoardGenerator {
-    private static final int NUM_OF_FIELDS = 19;
     private static final int NUM_OF_EDGES = 72;
     private static final int NUM_OF_VERTICES = 54;
 
@@ -21,11 +20,11 @@ public final class BoardGenerator {
         List<Vertex> vertices = new ArrayList<>();
 
         for(int i=0; i < NUM_OF_VERTICES; i++){
-            vertices.add(new Vertex(i, null));
+            vertices.add(new Vertex(i, null, null));
         }
 
         for(int i = 0; i < NUM_OF_EDGES; i++){
-            edges.add(new Edge(i, true, null));
+            edges.add(new Edge(i, null));
         }
         // 0 es piedra, 1 es wool, 9 es wood, 12 es wheat, 6 es brick
         fields.add(new Field(0, Resource.STONE, 10, false, //S
