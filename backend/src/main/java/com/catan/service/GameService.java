@@ -6,7 +6,6 @@ import com.catan.exceptions.GameNotFoundException;
 import com.catan.exceptions.TooManyPlayersException;
 import com.catan.model.*;
 import com.catan.model.board.BoardGenerator;
-import com.catan.model.board.Edge;
 import com.catan.model.board.Field;
 import com.catan.repository.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +31,8 @@ public class GameService {
 
     public Game joinGame(int userId) {
         User user = userService.getUserById(userId);
-        Player player = playerService.getPlayerByUserId(userId);
-        player.setUser(user);
         List<Game> games = gameRepository.findAll();
+        Player player = playerService.createPlayer(user, playerService.getColor(games.size()));
 
         if (games.isEmpty()) {
             return createGame(player);
@@ -42,6 +40,13 @@ public class GameService {
             Game game = games.get(0);
             return this.joinExistingGame(game, player);
         }
+    }
+    public Game createGame(Player initialPlayer) {
+        List<Player> players = new ArrayList<>();
+        List<Field> fields = BoardGenerator.generateFields();
+        players.add(initialPlayer);
+        Game newGame = new Game(players, fields);
+        return gameRepository.save(newGame);
     }
 
     public Game getGame() {
@@ -54,13 +59,6 @@ public class GameService {
         }
     }
 
-    public Game createGame(Player initialPlayer) {
-        List<Player> players = new ArrayList<>();
-        List<Field> fields = BoardGenerator.generateFields();
-        players.add(initialPlayer);
-        Game newGame = new Game(players, fields);
-        return gameRepository.save(newGame);
-    }
 
     public Game joinExistingGame(Game game, Player newPlayer) {
         if (game.getPlayers().size() < 4) {

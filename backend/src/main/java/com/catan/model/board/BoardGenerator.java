@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class BoardGenerator {
-    private static final int NUM_OF_FIELDS = 19;
     private static final int NUM_OF_EDGES = 72;
     private static final int NUM_OF_VERTICES = 54;
 

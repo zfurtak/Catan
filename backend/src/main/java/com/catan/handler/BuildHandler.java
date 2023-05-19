@@ -39,13 +39,12 @@ public class BuildHandler {
     // we cannot build a road if it doesn't have direct connection with road or building in the same color
     // or if the edge is already taken
     // TODO: needs to be tested
-    // TODO: checking the resources
     public Game buildRoad(int playerId, Edge edge){
         Edge edgeDB = edgeService.getEdge(edge.getId());
         if(edgeDB.getRoad() != null){
             throw new BuildingUnavailableException("There is already a road built");
         }
-        if(!doesPlayerHaveEnoughResources(null, playerId)) {
+        if(hasEnoughResourcesToBuild(null, playerId)) {
             throw new BuildingUnavailableException("Not enough resources");
         }
         Player playerDB = playerService.getPlayerById(playerId);
@@ -63,15 +62,15 @@ public class BuildHandler {
                             if(e.getId() != edgeDB.getId() && e.getRoad() != null
                                     && e.getColorOfEdge() == playerDB.getColor()){
                                 edgeService.updateEdge(edgeDB);
-                                playerResourceCardService.deleteByPlayerIdAndResource(playerId, Resource.BRICK);
-                                playerResourceCardService.deleteByPlayerIdAndResource(playerId, Resource.WOOD);
+                                playerResourceCardService.deleteResourceFromPlayer(playerId, Resource.BRICK);
+                                playerResourceCardService.deleteResourceFromPlayer(playerId, Resource.WOOD);
                                 return gameService.getGame();
                             }
                         }
                     }else if(v.getBuilding().getPlayer().getColor() == playerDB.getColor()){
                         edgeService.updateEdge(edgeDB);
-                        playerResourceCardService.deleteByPlayerIdAndResource(playerId, Resource.BRICK);
-                        playerResourceCardService.deleteByPlayerIdAndResource(playerId, Resource.WOOD);
+                        playerResourceCardService.deleteResourceFromPlayer(playerId, Resource.BRICK);
+                        playerResourceCardService.deleteResourceFromPlayer(playerId, Resource.WOOD);
                         return gameService.getGame();
                     }
                 }
@@ -80,20 +79,19 @@ public class BuildHandler {
         throw new BuildingUnavailableException("You cannot build road here");
     }
 
-    // TODO: check if we have enough resources
     public Game buildVillage(int playerId, Vertex vertex) {
         Vertex vertexDB = vertexService.getVertex(vertex);
         if(vertexDB.getBuilding() != null){
             throw new BuildingUnavailableException("There is already a building there");
         }
-        if(!doesPlayerHaveEnoughResources(BuildingType.VILLAGE, playerId)) {
+        if(hasEnoughResourcesToBuild(BuildingType.VILLAGE, playerId)) {
             throw new BuildingUnavailableException("Not enough resources");
         }
         Player playerDB = playerService.getPlayerById(playerId);
         List<Edge> edges = vertexDB.getEdges();
         boolean canBuild = false;
         for(Edge e : edges) {
-            if(e.getRoad() != null && e.getRoad().getPlayer().getColor() == playerDB.getColor()) {
+            if(e.getRoad() != null && e.getColorOfEdge() == playerDB.getColor()) {
                 canBuild = true;
                 break;
             }
@@ -119,52 +117,45 @@ public class BuildHandler {
         building.setPlayer(playerDB);
         building.setType(BuildingType.VILLAGE);
         vertexDB.setBuilding(building);
-        playerResourceCardService.deleteByPlayerIdAndResource(playerId, Resource.BRICK);
-        playerResourceCardService.deleteByPlayerIdAndResource(playerId, Resource.WOOD);
-        playerResourceCardService.deleteByPlayerIdAndResource(playerId, Resource.WOOL);
-        playerResourceCardService.deleteByPlayerIdAndResource(playerId, Resource.WHEAT);
+        playerResourceCardService.deleteResourceFromPlayer(playerId, Resource.BRICK);
+        playerResourceCardService.deleteResourceFromPlayer(playerId, Resource.WOOD);
+        playerResourceCardService.deleteResourceFromPlayer(playerId, Resource.WOOL);
+        playerResourceCardService.deleteResourceFromPlayer(playerId, Resource.WHEAT);
         return gameService.getGame();
     }
 
     public Game buildCity(int playerId, Vertex vertex) {
         Vertex vertexDB = vertexService.getVertex(vertex);
         if(vertexDB.getBuilding() != null && vertexDB.getBuilding().getPlayer().getId() == playerId){
-            if(!doesPlayerHaveEnoughResources(BuildingType.CITY, playerId)) {
+            if(hasEnoughResourcesToBuild(BuildingType.CITY, playerId)) {
                 throw new BuildingUnavailableException("Not enough resources");
             }
             vertexDB.getBuilding().setType(BuildingType.CITY);
-            playerResourceCardService.deleteByPlayerIdAndResource(playerId, Resource.WHEAT);
-            playerResourceCardService.deleteByPlayerIdAndResource(playerId, Resource.WHEAT);
-            playerResourceCardService.deleteByPlayerIdAndResource(playerId, Resource.STONE);
-            playerResourceCardService.deleteByPlayerIdAndResource(playerId, Resource.STONE);
-            playerResourceCardService.deleteByPlayerIdAndResource(playerId, Resource.STONE);
+            playerResourceCardService.deleteResourceFromPlayer(playerId, Resource.WHEAT);
+            playerResourceCardService.deleteResourceFromPlayer(playerId, Resource.WHEAT);
+            playerResourceCardService.deleteResourceFromPlayer(playerId, Resource.STONE);
+            playerResourceCardService.deleteResourceFromPlayer(playerId, Resource.STONE);
+            playerResourceCardService.deleteResourceFromPlayer(playerId, Resource.STONE);
             return gameService.getGame();
         }
         throw new BuildingUnavailableException("You cannot build the city here");
     }
 
-    private boolean doesPlayerHaveEnoughResources(BuildingType buildingType, int playerId) {
+    private boolean hasEnoughResourcesToBuild(BuildingType buildingType, int playerId) {
         Map<Resource, Integer> resources = playerService.getPlayerResources(playerId);
         if(buildingType == null) {
-            if(resources.getOrDefault(Resource.BRICK, 0) >= 1 &&
-                    resources.getOrDefault(Resource.WOOD, 0) >= 1) {
-                return true;
-            }
+            return resources.getOrDefault(Resource.BRICK, 0) < 1 ||
+                    resources.getOrDefault(Resource.WOOD, 0) < 1;
         }
         else if(buildingType == BuildingType.VILLAGE) {
-            if(resources.getOrDefault(Resource.BRICK, 0) >= 1 &&
-                    resources.getOrDefault(Resource.WOOD, 0) >= 1 &&
-                    resources.getOrDefault(Resource.WOOL, 0) >= 1 &&
-                    resources.getOrDefault(Resource.WHEAT, 0) >= 1) {
-                return true;
-            }
+            return resources.getOrDefault(Resource.BRICK, 0) < 1 ||
+                    resources.getOrDefault(Resource.WOOD, 0) < 1 ||
+                    resources.getOrDefault(Resource.WOOL, 0) < 1 ||
+                    resources.getOrDefault(Resource.WHEAT, 0) < 1;
         }
         else {
-            if(resources.getOrDefault(Resource.WHEAT, 0) >= 2 &&
-                    resources.getOrDefault(Resource.STONE, 0) >= 3) {
-                return true;
-            }
+            return resources.getOrDefault(Resource.WHEAT, 0) < 2 ||
+                    resources.getOrDefault(Resource.STONE, 0) < 3;
         }
-        return false;
     }
 }
