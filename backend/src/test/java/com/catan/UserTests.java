@@ -6,6 +6,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -24,170 +26,167 @@ import com.catan.service.UserService;
 class UserTests {
 
     @Autowired
-    private UserRepository repository;
+    private UserRepository repositoryUser;
 
     @Autowired
-    private UserService control;
+    private UserService service;
 
     private User user;
     private User name;
 
     @BeforeEach
     void deleteBefore(){
-        repository.deleteAll();
+        repositoryUser.deleteAll();
     }
 
     @AfterEach
     void deleteAfter(){
-        repository.deleteAll();
+        repositoryUser.deleteAll();
     }
 
     //register a new user in the database, get said user by its name and check that it returns the correct user
     @Test
     void newUserName() {
-        control.registerUser("user", "pass");
-        user = control.getUserByName("user");
+        user = service.registerUser("user", "pass");
         assertEquals("user", user.getUsername());
     }
 
     //register a new user in the database, get said user by its name and check that its password is the string transformed by the hashPassword method
     @Test
     void newUserPassword(){
-        control.registerUser("user", "pass");
-        user = control.getUserByName("user");
-        assertEquals(control.hashPassword("pass"), user.getPassword());
+        user = service.registerUser("user", "pass");
+        assertEquals(service.hashPassword("pass"), user.getPassword());
     }
 
     //register a new user in the database, get said user by its name and check that its ranking points are 0
     @Test
     void newUserRanking(){
-        control.registerUser("user", "pass");
-        user = control.getUserByName("user");
+        user = service.registerUser("user", "pass");
         assertEquals(0, user.getRankingPoints());
     }
 
     ////register a new user in the database, trying to create a new user with the same username will throw UserAlreadyExistsException
     @Test
     void newUserAlreadyExistsException() {
-        control.registerUser("user", "pass");
-        assertThrows(UserAlreadyExistsException.class, () -> control.registerUser("user", "word"));
+        service.registerUser("user", "pass");
+        assertThrows(UserAlreadyExistsException.class, () -> service.registerUser("user", "word"));
     }
 
     @Test
     void UsernameIsTooShortException(){
-        assertThrows(UsernameTooShortException.class, () -> control.registerUser("usr", "word"));
+        assertThrows(UsernameTooShortException.class, () -> service.registerUser("usr", "word"));
     }
 
     //register two new users in the database, check that their ids are different
     @Test
     void newUsersIdGeneration(){
-        control.registerUser("user", "pass");
-        control.registerUser("name", "word");
-        user = control.getUserByName("user");
-        name = control.getUserByName("name");
+        user = service.registerUser("user", "pass");
+        name = service.registerUser("name", "word");
         assertNotEquals(user.getId(), name.getId());
     }
 
     //get a user with getUserByName from an empty database throws UserNotFoundException
     @Test
     void getUsersByNameFromEmpty(){
-        assertThrows(UserNotFoundException.class, () -> control.getUserByName("user"));
+        assertThrows(UserNotFoundException.class, () -> service.getUserByName("user"));
     }
 
     //register a new user, get its id, use it to get the user with getUserById and check if it returns the correct user
     @Test
     void getUsersById(){
-        control.registerUser("user", "pass");
-        user = control.getUserByName("user");
+        user = service.registerUser("user", "pass");
         int id = user.getId();
-        user = control.getUserById(id);
+        user = service.getUserById(id);
         assertEquals("user", user.getUsername());
     }
 
     //get a user with getUserById from an empty database throws UserNotFoundException
     @Test
     void getUsersByIdException(){
-        assertThrows(UserNotFoundException.class, () -> control.getUserById(0));
+        assertThrows(UserNotFoundException.class, () -> service.getUserById(0));
     }
 
     //register a new user, store in logUser the user returned by the logUserIn and check if they are the same
     @Test
     void logUser(){
-        control.registerUser("user", "pass");
-        user = control.getUserByName("user");
-        User logUser = control.logUserIn("user", "pass"); 
-        assertEquals(user.getId(), logUser.getId());
+        user = service.registerUser("user", "pass");
+        name = service.logUserIn("user", "pass"); 
+        assertEquals(user.getId(), name.getId());
     }
-
 
     //using logUserIn with a wrong password throws PasswordIncorrectException
     @Test
-    void logUserException(){
-        control.registerUser("user", "pass");
-        user = control.getUserByName("user");
-        assertThrows(PasswordIncorrectException.class, () -> control.logUserIn("user", "word"));
+    void logUserUsernameException(){
+        assertThrows(UserNotFoundException.class, () -> service.logUserIn("user", "word"));
+    }
+
+    //using logUserIn with a wrong password throws PasswordIncorrectException
+    @Test
+    void logUserPasswordException(){
+        user = service.registerUser("user", "pass");
+        assertThrows(PasswordIncorrectException.class, () -> service.logUserIn("user", "word"));
     }
 
     //register a new user, get the user id, delete the user using its id and check that a user with that id does not exist
     @Test
     void deleteUserCheckingId(){
-        control.registerUser("user", "pass");
-        user = control.getUserByName("user");
+        user = service.registerUser("user", "pass");
         int id = user.getId();
-        control.deleteUserById(id);
-        assertThrows(UserNotFoundException.class, () -> control.getUserById(id));
+        service.deleteUserById(id);
+        assertThrows(UserNotFoundException.class, () -> service.getUserById(id));
     }
 
     //register a new user, get the user id, delete the user using its id and check that a user with the username we used to register does not exist 
     @Test
     void deleteUserCheckingUsername(){
-        control.registerUser("user", "pass");
-        user = control.getUserByName("user");
+        user = service.registerUser("user", "pass");
         int id = user.getId();
-        control.deleteUserById(id);
-        assertThrows(UserNotFoundException.class, () -> control.getUserByName("user"));
+        service.deleteUserById(id);
+        assertThrows(UserNotFoundException.class, () -> service.getUserByName("user"));
     }
 
     //using deleteUserById when that id's user does not exist throws UserNotFoundException
     @Test
     void deleteUserException(){
-        assertThrows(UserNotFoundException.class, () -> control.deleteUserById(0));
+        assertThrows(UserNotFoundException.class, () -> service.deleteUserById(0));
     }
 
     //register a new user, get its id, update user with their id, get the user by id and check its username has been changed
     @Test
     void updateUserUsername(){
-        control.registerUser("user", "pass");
-        user = control.getUserByName("user");
+        user = service.registerUser("user", "pass");
         int id = user.getId();
         name = new User("name", "word");
-        control.updateUserById(id, name);
-        user = control.getUserById(id);
+        user = service.updateUserById(id, name);
         assertEquals(name.getUsername(), user.getUsername());
     }
 
     //register a new user, get its id, update user with their id, get the user by id and check its password has been changed
     @Test
     void updateUserPassword(){
-        control.registerUser("user", "pass");
-        user = control.getUserByName("user");
+        user = service.registerUser("user", "pass");
         int id = user.getId();
         name = new User("name", "word");
-        control.updateUserById(id, name);
-        user = control.getUserById(id);
-        assertEquals(control.hashPassword(name.getPassword()), user.getPassword());
+        user = service.updateUserById(id, name);
+        assertEquals(service.hashPassword(name.getPassword()), user.getPassword());
     }
 
     //register a new user, get its id, update user with their id, get the user by id and check its ranking points have been changed
     @Test
     void updateUserRanking(){
-        control.registerUser("user", "pass");
-        user = control.getUserByName("user");
+        user = service.registerUser("user", "pass");
         int id = user.getId();
         name = new User("name", "word");
-        control.updateUserById(id, name);
-        user = control.getUserById(id);
+        user = service.updateUserById(id, name);
         assertEquals(name.getRankingPoints(), user.getRankingPoints());
+    }
+
+    @Test
+    void getAllUsersInRepository(){
+        service.registerUser("user", "pass");
+        service.registerUser("name", "word");
+        List<User> users = service.getAllUsers();
+        assertTrue(users.size() == 2);
     }
 
 }
