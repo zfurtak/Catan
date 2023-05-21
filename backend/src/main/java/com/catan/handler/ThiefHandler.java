@@ -33,7 +33,7 @@ public class ThiefHandler {
         Game game = this.gameService.getGame();
 
         for (Player player : game.getPlayers()) {
-            List<PlayerResourceCard> playerCards = this.playerResourceCardService.getPlayersCardNumber(player);
+            List<PlayerResourceCard> playerCards = this.playerResourceCardService.findAllCardsByPlayerId(player.getId());
             if (playerCards.size() > 7) {
                 // for now we randomly remove half of player cards
                 int numberOfCardsToRemove = playerCards.size() / 2;

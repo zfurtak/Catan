@@ -14,10 +14,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import com.catan.exceptions.PasswordIncorrectException;
-import com.catan.exceptions.UserAlreadyExistsException;
 import com.catan.exceptions.UserNotFoundException;
-import com.catan.exceptions.UsernameTooShortException;
 import com.catan.model.Color;
 import com.catan.model.Player;
 import com.catan.model.PlayerResourceCard;
@@ -142,12 +139,9 @@ public class PlayerTests {
     //register a new user, get said user by its name, create a new player with that user, get player's id
     //get the player by its id and check it returns the player successfully
     @Test
-    @Disabled
     void getPlayerFromId(){
         controlUser.registerUser("user", "pass");
         user = controlUser.getUserByName("user");
-        //player = servicePlayer.createPlayer(user, Color.RED);
-        //serviceGame.createGame(player); //it dies here
         serviceGame.joinGame(user.getId()); //
         maybe = repositoryPlayer.findByUserId(user.getId());
         player = maybe.get();

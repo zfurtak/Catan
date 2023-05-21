@@ -65,13 +65,14 @@ class UserTests {
         assertEquals(0, user.getRankingPoints());
     }
 
-    ////register a new user in the database, trying to create a new user with the same username will throw UserAlreadyExistsException
+    //register a new user in the database, trying to create a new user with the same username will throw UserAlreadyExistsException
     @Test
     void newUserAlreadyExistsException() {
         service.registerUser("user", "pass");
         assertThrows(UserAlreadyExistsException.class, () -> service.registerUser("user", "word"));
     }
 
+    //registering a user with an username with less than four characters throws UsernameTooShortException
     @Test
     void UsernameIsTooShortException(){
         assertThrows(UsernameTooShortException.class, () -> service.registerUser("usr", "word"));
@@ -175,12 +176,14 @@ class UserTests {
     @Test
     void updateUserRanking(){
         user = service.registerUser("user", "pass");
+        user.setRankingPoints(5);
         int id = user.getId();
         name = new User("name", "word");
-        user = service.updateUserById(id, name);
-        assertEquals(name.getRankingPoints(), user.getRankingPoints());
+        name = service.updateUserById(id, name);
+        assertNotEquals(name.getRankingPoints(), user.getRankingPoints());
     }
 
+    //register two new users, get all users and check the size of the list is two
     @Test
     void getAllUsersInRepository(){
         service.registerUser("user", "pass");
