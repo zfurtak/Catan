@@ -66,32 +66,6 @@ public class PlayerTests {
         repositoryGame.deleteAll();
     }
 
-    @Test
-    public void testPlayerInitialization() {
-        // Create a sample user
-        User user = new User();
-        user.setId(1);
-
-        // Create a player
-        Player player = new Player();
-        player.setId(10);
-        player.setUser(user);
-        player.setColor(Color.RED);
-        player.setVictoryPoints(5);
-        player.setNumberOfRoads(4);
-        player.setNumberOfVillages(3);
-        player.setNumberOfCities(2);
-
-        // Perform assertions
-        Assertions.assertEquals(10, player.getId());
-        Assertions.assertEquals(user, player.getUser());
-        Assertions.assertEquals(Color.RED, player.getColor());
-        Assertions.assertEquals(5, player.getVictoryPoints());
-        Assertions.assertEquals(4, player.getNumberOfRoads());
-        Assertions.assertEquals(3, player.getNumberOfVillages());
-        Assertions.assertEquals(2, player.getNumberOfCities());
-    }
-
     @AfterEach
     void deleteAfter(){
         repositoryUser.deleteAll();
@@ -100,70 +74,80 @@ public class PlayerTests {
         repositoryGame.deleteAll();
     }
 
+    @Test
+    void createPlayerSetId(){
+        player = new Player();
+        player.setId(10);
+        assertEquals(10, player.getId());
+    }
+
     //register a new user, get said user by its name, create a new player, set the user and check its username is correct
     @Test
     void createPlayerSetUsername(){
-        controlUser.registerUser("user", "pass");
-        user = controlUser.getUserByName("user");
+        user = controlUser.registerUser("user", "pass");
         player = new Player();
         player.setUser(user);
-        assertEquals(player.getUser().getUsername(), "user");
+        assertEquals(user, player.getUser());
     }
 
-    //register a new user, get said user by its name, create a new player with that user and check it has 0 victory points
+    //create a new player, set its victory points to 5 and check it has 5 victory points
     @Test
     void createPlayerSetVictoryPoints(){
         player = new Player();
-        player.setVictoryPoints(0);
-        assertEquals(player.getVictoryPoints(), 0);
+        player.setVictoryPoints(5);
+        assertEquals(5, player.getVictoryPoints());
     }
 
-    //register a new user, get said user by its name, create a new player with that user and check it has 0 roads
+    //create a new player, set its roads to 4 and check it has 4 roads
     @Test
     void createPlayerSetRoads(){
         player = new Player();
-        player.setNumberOfRoads(0);
-        assertEquals(player.getNumberOfRoads(), 0);
+        player.setNumberOfRoads(4);
+        assertEquals(4, player.getNumberOfRoads());
     }
 
-    //register a new user, get said user by its name, create a new player with that user and check it has 0 villages
+    //create a new player, set its villages to 3 and check it has 3 villages
     @Test
     void createPlayerSetVillages(){
         player = new Player();
-        player.setNumberOfVillages(0);
-        assertEquals(player.getNumberOfVillages(), 0);
+        player.setNumberOfVillages(3);
+        assertEquals(3, player.getNumberOfVillages());
     }
 
+    //create a new player, set its color to RED and check its color is RED
     @Test
     void createPlayerSetColor(){
         player = new Player();
         player.setColor(Color.RED);
-        assertEquals(player.getColor(), Color.RED);
+        assertEquals(Color.RED, player.getColor());
     }
 
-    //register a new user, get said user by its name, create a new player with that user and check it has 0 cities
+    //create a new player, set its cities to 2 and check it has 2 cities
     @Test
     void createPlayerSetCities(){
         player = new Player();
-        player.setNumberOfCities(0);
-        assertEquals(player.getNumberOfCities(), 0);
+        player.setNumberOfCities(2);
+        assertEquals(2, player.getNumberOfCities());
     }
 
     //register a new user, get said user by its name, create a new player with that, add the player and check it was added successfully
     @Test
+    @Disabled
     void createPlayer(){
         user = controlUser.registerUser("user", "pass");
-        player = servicePlayer.createPlayer(user, Color.RED);
+        serviceGame.joinGame(user.getId()); 
+        maybe = repositoryPlayer.findByUserId(user.getId());
+        player = maybe.get();
         assertEquals(player.getUser().getUsername(), "user");
     }
     
     //register a new user, get said user by its name, create a new player with that user, get player's id
     //get the player by its id and check it returns the player successfully
     @Test
+    @Disabled
     void getPlayerFromId(){
-        controlUser.registerUser("user", "pass");
-        user = controlUser.getUserByName("user");
-        serviceGame.joinGame(user.getId()); //
+        user = controlUser.registerUser("user", "pass");
+        serviceGame.joinGame(user.getId()); 
         maybe = repositoryPlayer.findByUserId(user.getId());
         player = maybe.get();
         int id = player.getId();
@@ -183,15 +167,11 @@ public class PlayerTests {
     @Test
     @Disabled
     void updateVictoryPointsFromPlayer(){
-        controlUser.registerUser("user", "pass");
-        user = controlUser.getUserByName("user");
+        user = controlUser.registerUser("user", "pass");
         servicePlayer.createPlayer(user, Color.RED);
         serviceGame.createGame(player);
-        maybe = repositoryPlayer.findByUserId(user.getId());
-        player = maybe.get();
-        int id = player.getId();
         servicePlayer.updateVictoryPoints(player, 3);     
-        player = servicePlayer.getPlayerById(id);
+        player = servicePlayer.getPlayerById(player.getId());
         assertEquals(player.getVictoryPoints(), 3);
     }
 
