@@ -25,18 +25,18 @@ import java.util.Optional;
 @Service
 public class UserService {
     private final UserRepository userRepository;
-    private final PlayerService userService;
+    private final PlayerService playerService;
 
     /**
      * Initialize the service.
      * @param userRepository the User repository associated to this service
-     * @param playerService the player service this user service is connected to
+     * @param playerService the Player service associated to this service
      */
     @Autowired
     public UserService(UserRepository userRepository,
-                       PlayerService userService){
+                       PlayerService playerService){
         this.userRepository = userRepository;
-        this.userService = userService;
+        this.playerService = playerService;
     }
 
     /**

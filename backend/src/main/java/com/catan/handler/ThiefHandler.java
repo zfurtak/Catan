@@ -9,6 +9,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * Handler for the Thief
+ */
 @Component
 public class ThiefHandler {
     private final PlayerService playerService;
@@ -16,6 +19,13 @@ public class ThiefHandler {
     private final GameService gameService;
     private final PlayerResourceCardService playerResourceCardService;
 
+    /**
+     * Initialize the handler.
+     * @param gameService the Game service associated to this handler
+     * @param playerService the Player service associated to this handler
+     * @param fieldService the Field service associated to this handler
+     * @param playerResourceCardService the PlayerReosurceCard service associated to this handler
+     */
     public ThiefHandler(GameService gameService,
                         PlayerService playerService,
                         FieldService fieldService,
@@ -28,10 +38,14 @@ public class ThiefHandler {
 
 
     //TODO: current player can steal(random card) from player among those who have villages/cities in the chosen field
-
+    /**
+     * Activates the thief, moving it to a new field and stealing  half of the resource cards from the players if the yhave more than seven cards. Returns the game where it has been activated.
+     * @param userId id of the user that activates the thief
+     * @param field field where the thief is getting blocked
+     * @return game where the thief is activated
+     */
     public Game thief(int userId, Field field) {
         Game game = this.gameService.getGame();
-
         for (Player player : game.getPlayers()) {
             List<PlayerResourceCard> playerCards = this.playerResourceCardService.findAllCardsByPlayerId(player.getId());
             if (playerCards.size() > 7) {

@@ -114,7 +114,7 @@ public class PlayerService {
 
 
     /**
-     * Returns a list with the resources of the player with the specified id that are fit to be traded with the bank. For a resource to be considered fit, the player needs to have at least four of it.
+     * Returns a list with the resources of the player with the specified id that are fit to be traded with the bank. For a resource to be considered fit, the player needs to have at least four units of it.
      * @param playerId id of the player whose resources are got
      * @return list of resource types that can be traded with the bank
      */
