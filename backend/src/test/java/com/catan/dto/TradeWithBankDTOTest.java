@@ -19,9 +19,6 @@ class TradeWithBankDTOTest {
         Assertions.assertEquals(resourceFromBank, res);
     }
 
-
-
-
     @Test
     public void testConvertPlayerResourceFromInt() {
         TradeWithBankDTO tradeDTO = new TradeWithBankDTO(2, 4); // Assuming resourceFromPlayer = 2
