@@ -65,5 +65,5 @@ Further information: https://www.catan.com/sites/default/files/2021-06/catan_bas
 
 Wikipedia contributors. (2023, January 16). Catan. In Wikipedia, The Free Encyclopedia. Retrieved 12:18, March 8, 2023, from https://en.wikipedia.org/w/index.php?title=Catan&oldid=1133942167
 
-##Javadoc Documentation
+## Javadoc Documentation
 Open the mvnw in integrated terminal. Then, execute .\mvnw javadoc:javadoc  , and it should generate in a folder the html for the documentation.
