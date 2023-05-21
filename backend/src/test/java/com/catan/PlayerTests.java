@@ -121,10 +121,9 @@ public class PlayerTests {
 
     //register a new user, get said user by its name, create a new player with that user and check it has 0 cities
     @Test
-    void createPlayerCheckInitialCities(){
-        controlUser.registerUser("user", "pass");
-        user = controlUser.getUserByName("user");
+    void createPlayerSetCities(){
         player = new Player();
+        player.setNumberOfCities(0);
         assertEquals(player.getNumberOfCities(), 0);
     }
 

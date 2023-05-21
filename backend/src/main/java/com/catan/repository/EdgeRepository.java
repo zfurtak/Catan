@@ -8,5 +8,10 @@ import java.util.Optional;
 
 public interface EdgeRepository extends JpaRepository<Edge, Integer> {
 
+    /**
+     * Returns the edge associated to the specified id. If it is not saved in the repository it will return null.
+     * @param id id of the edge
+     * @return edge if found, else null
+     */
     Optional<Edge> findById(int id);
 }
