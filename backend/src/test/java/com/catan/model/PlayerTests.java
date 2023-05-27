@@ -75,7 +75,7 @@ public class PlayerTests {
     }
 
     @Test
-    void createPlayerSetId(){
+    void createPlayerId(){
         player = new Player();
         player.setId(10);
         assertEquals(10, player.getId());
@@ -83,7 +83,7 @@ public class PlayerTests {
 
     //register a new user, get said user by its name, create a new player, set the user and check its username is correct
     @Test
-    void createPlayerSetUsername(){
+    void createPlayerUsername(){
         user = controlUser.registerUser("user", "pass");
         player = new Player();
         player.setUser(user);
@@ -92,7 +92,7 @@ public class PlayerTests {
 
     //create a new player, set its victory points to 5 and check it has 5 victory points
     @Test
-    void createPlayerSetVictoryPoints(){
+    void createPlayerVictoryPoints(){
         player = new Player();
         player.setVictoryPoints(5);
         assertEquals(5, player.getVictoryPoints());
@@ -100,7 +100,7 @@ public class PlayerTests {
 
     //create a new player, set its roads to 4 and check it has 4 roads
     @Test
-    void createPlayerSetRoads(){
+    void createPlayerRoads(){
         player = new Player();
         player.setNumberOfRoads(4);
         assertEquals(4, player.getNumberOfRoads());
@@ -108,7 +108,7 @@ public class PlayerTests {
 
     //create a new player, set its villages to 3 and check it has 3 villages
     @Test
-    void createPlayerSetVillages(){
+    void createPlayerVillages(){
         player = new Player();
         player.setNumberOfVillages(3);
         assertEquals(3, player.getNumberOfVillages());
@@ -116,7 +116,7 @@ public class PlayerTests {
 
     //create a new player, set its color to RED and check its color is RED
     @Test
-    void createPlayerSetColor(){
+    void createPlayerColor(){
         player = new Player();
         player.setColor(Color.RED);
         assertEquals(Color.RED, player.getColor());
@@ -124,7 +124,7 @@ public class PlayerTests {
 
     //create a new player, set its cities to 2 and check it has 2 cities
     @Test
-    void createPlayerSetCities(){
+    void createPlayerCities(){
         player = new Player();
         player.setNumberOfCities(2);
         assertEquals(2, player.getNumberOfCities());
