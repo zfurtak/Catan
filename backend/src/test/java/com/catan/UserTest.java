@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -17,13 +18,14 @@ import com.catan.exceptions.PasswordIncorrectException;
 import com.catan.exceptions.UserAlreadyExistsException;
 import com.catan.exceptions.UserNotFoundException;
 import com.catan.exceptions.UsernameTooShortException;
+
 import com.catan.model.User;
 import com.catan.repository.UserRepository;
 import com.catan.service.UserService;
 
 
 @SpringBootTest
-class UserTests {
+public class UserTest {
 
     @Autowired
     private UserRepository repositoryUser;

@@ -97,7 +97,7 @@ public class GameService {
             game.getPlayers().add(newPlayer);
             return gameRepository.save(game);
         } else {
-            throw new TooManyPlayersException("They are already 4 players");
+            throw new TooManyPlayersException("There are already 4 players");
         }
     }
 

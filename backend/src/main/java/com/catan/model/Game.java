@@ -24,7 +24,7 @@ public class Game {
 
     private int numberOfPlayers;
 
-    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "player_id", referencedColumnName = "id")
     private List<Player> players;
 

@@ -67,6 +67,10 @@ public class PlayerService {
             Player p = new Player();
             p.setColor(color);
             p.setUser(user);
+            p.setNumberOfCities(0);
+            p.setNumberOfVillages(0);
+            p.setNumberOfRoads(0);
+            p.setVictoryPoints(0);
             return playerRepository.save(p);
         }
     }
@@ -88,7 +92,7 @@ public class PlayerService {
      */
     public Player updateVictoryPoints(Player player, int points) {
         player.setVictoryPoints(points);
-        this.playerRepository.save(player);
+        player = this.playerRepository.save(player);
         return player;
     }
 
@@ -116,7 +120,7 @@ public class PlayerService {
     /**
      * Returns a list with the resources of the player with the specified id that are fit to be traded with the bank. For a resource to be considered fit, the player needs to have at least four units of it.
      * @param playerId id of the player whose resources are got
-     * @return list of resource types that can be traded with the bank
+     * @return list with the numbers corresponding to the resource types that can be traded with the bank
      */
     public List<Integer> getResourcesToTradeWithBank(int playerId){
         return this.getPlayerResources(playerId).entrySet()

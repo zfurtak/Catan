@@ -25,7 +25,6 @@ import java.util.Optional;
 @Service
 public class UserService {
     private final UserRepository userRepository;
-    private final PlayerService playerService;
 
     /**
      * Initialize the service.
@@ -33,10 +32,8 @@ public class UserService {
      * @param playerService the Player service associated to this service
      */
     @Autowired
-    public UserService(UserRepository userRepository,
-                       PlayerService playerService){
+    public UserService(UserRepository userRepository){
         this.userRepository = userRepository;
-        this.playerService = playerService;
     }
 
     /**
