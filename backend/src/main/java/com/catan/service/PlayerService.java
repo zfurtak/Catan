@@ -107,10 +107,6 @@ public class PlayerService {
         }
     }
 
-    public Player updateVictoryPoints(int id, int points) {
-        return updateVictoryPoints(this.getPlayerById(id), points);
-    }
-
     public void deletePlayers() {
         playerRepository.deleteAll();
     }
