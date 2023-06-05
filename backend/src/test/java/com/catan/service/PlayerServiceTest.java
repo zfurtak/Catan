@@ -10,9 +10,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
+import com.catan.exceptions.IncorrectGamesNumberException;
 import com.catan.exceptions.PlayerAlreadyExistsException;
+import com.catan.exceptions.ResourceCardNotFoundException;
 import com.catan.exceptions.UserNotFoundException;
 import com.catan.model.Color;
 import com.catan.model.Player;
@@ -147,8 +150,16 @@ public class PlayerServiceTest {
     //using getPlayerById when player does not exist throws UserNotFoundException
     //(although it might be better to have a PlayerNotFoundException)
     @Test
-    void getPlayerFromIdNotFoundException(){
+    void getPlayerFromIdNotFoundExceptionWhenEmpty(){
         assertThrows(UserNotFoundException.class, () -> servicePlayer.getPlayerById(0));
+    }
+
+    @Test
+    void getPlayerFromIdNotFoundExceptionWithPlayers(){
+        user = serviceUser.registerUser("user", "pass");
+        game = serviceGame.joinGame(user.getId()); 
+        player = game.getPlayers().get(0);
+        assertThrows(UserNotFoundException.class, () -> servicePlayer.getPlayerById(player.getId()+1));
     }
 
     //IMPORTANT: it updates the player's points, but the players of the game don't get updated
@@ -250,8 +261,7 @@ public class PlayerServiceTest {
     }
 
     @Test
-    @Disabled
-    void getPlayersResourcesUpdateAfterTradeBank(){
+    void updateAfterTradingWithBank(){
         user = serviceUser.registerUser("user", "pass");
         game = serviceGame.joinGame(user.getId()); 
         player = game.getPlayers().get(0);
@@ -263,19 +273,126 @@ public class PlayerServiceTest {
         servicePlayResCard.addCard(player, Resource.WOOD);
         servicePlayResCard.addCard(player, Resource.WOOD);      //5 units of WOOD
         servicePlayResCard.addCard(player, Resource.BRICK);
-        servicePlayResCard.addCard(player, Resource.BRICK);
-        servicePlayResCard.addCard(player, Resource.BRICK);
-        servicePlayResCard.addCard(player, Resource.BRICK);     //4 units of BRICK
+        servicePlayResCard.addCard(player, Resource.BRICK);     //2 units of BRICK
 
-        servicePlayer.updateCardsAfterTradingWithBank(player.getId(), Resource.BRICK, Resource.WHEAT);
+        //give 4 of WOOD for 1 WHEAT
+        servicePlayer.updateCardsAfterTradingWithBank(player.getId(), Resource.WOOD, Resource.WHEAT);   
 
         Map<Resource, Integer> resources = servicePlayer.getPlayerResources(player.getId());
         
         Map<Resource, Integer> result = new HashMap<>();
         result.put(Resource.STONE, 1);
-        result.put(Resource.WOOD, 5);
+        result.put(Resource.WOOD, 1);
+        result.put(Resource.BRICK, 2);
         result.put(Resource.WHEAT, 1);
 
         assertEquals(result, resources);
+    }
+
+    @Test
+    void updateAfterTradingWithBankNotEnough(){
+        user = serviceUser.registerUser("user", "pass");
+        game = serviceGame.joinGame(user.getId()); 
+        player = game.getPlayers().get(0);
+
+        servicePlayResCard.addCard(player, Resource.WOOD);
+        servicePlayResCard.addCard(player, Resource.WOOD);
+        servicePlayResCard.addCard(player, Resource.WOOD);
+
+        assertThrows(ResourceCardNotFoundException.class, () -> servicePlayer.updateCardsAfterTradingWithBank(player.getId(), Resource.WOOD, Resource.WHEAT));
+    }
+
+    @Test
+    void updateAfterTradingWithPlayer(){
+        user = serviceUser.registerUser("user", "pass");
+        game = serviceGame.joinGame(user.getId()); 
+        player = game.getPlayers().get(0);
+
+        user2 = serviceUser.registerUser("name", "word");
+        game = serviceGame.joinGame(user2.getId()); 
+        player2 = game.getPlayers().get(1);
+
+        servicePlayResCard.addCard(player, Resource.STONE);     //1 unit of STONE
+        servicePlayResCard.addCard(player, Resource.WOOD);
+        servicePlayResCard.addCard(player, Resource.WOOD);
+        servicePlayResCard.addCard(player, Resource.WOOD);
+        servicePlayResCard.addCard(player, Resource.WOOD);
+        servicePlayResCard.addCard(player, Resource.WOOD);      //5 units of WOOD
+        servicePlayResCard.addCard(player, Resource.BRICK);
+        servicePlayResCard.addCard(player, Resource.BRICK);     //2 units of BRICK
+
+        servicePlayResCard.addCard(player2, Resource.WHEAT);
+        servicePlayResCard.addCard(player2, Resource.WHEAT);
+        servicePlayResCard.addCard(player2, Resource.WHEAT);    //3 units of WHEAT
+
+        //give 4 of WOOD for 2 WHEAT
+        servicePlayer.updateCardsAfterTradingWithPlayer(player.getId(), player2.getId(), Resource.WOOD, Resource.WHEAT, 4, 2);  
+
+        Map<Resource, Integer> resources1 = servicePlayer.getPlayerResources(player.getId());
+        
+        Map<Resource, Integer> result1 = new HashMap<>();
+        result1.put(Resource.STONE, 1);
+        result1.put(Resource.WOOD, 1);  // -4 of WOOD
+        result1.put(Resource.BRICK, 2);
+        result1.put(Resource.WHEAT, 2); // +2 of WHEAT
+
+        Map<Resource, Integer> resources2 = servicePlayer.getPlayerResources(player2.getId());
+
+        Map<Resource, Integer> result2 = new HashMap<>();
+        result2.put(Resource.WOOD, 4);  // +4 of WOOD
+        result2.put(Resource.WHEAT, 1); // -2 of WHEAT
+
+        assertEquals(result1, resources1);
+        assertEquals(result2, resources2);
+    }
+
+    @Test
+    void updateAfterTradingWithPlayerWhenNotEnoughResources(){
+        user = serviceUser.registerUser("user", "pass");
+        game = serviceGame.joinGame(user.getId()); 
+        player = game.getPlayers().get(0);
+
+        user2 = serviceUser.registerUser("name", "word");
+        game = serviceGame.joinGame(user2.getId()); 
+        player2 = game.getPlayers().get(1);
+
+        servicePlayResCard.addCard(player, Resource.STONE);     //1 unit of STONE
+
+        servicePlayResCard.addCard(player2, Resource.WHEAT);
+        servicePlayResCard.addCard(player2, Resource.WHEAT);
+        servicePlayResCard.addCard(player2, Resource.WHEAT);    //3 units of WHEAT
+
+        //give 4 of WOOD for 2 WHEAT, but player does not have enough
+        assertThrows(ResourceCardNotFoundException.class, () -> servicePlayer.updateCardsAfterTradingWithPlayer(player.getId(), player2.getId(), Resource.WOOD, Resource.WHEAT, 4, 2));  
+
+    }
+
+    @Test
+    void updateAfterTradingWithNonExistingPlayer(){
+        user = serviceUser.registerUser("user", "pass");
+        game = serviceGame.joinGame(user.getId()); 
+        player = game.getPlayers().get(0);
+
+        servicePlayResCard.addCard(player, Resource.WOOD);
+        servicePlayResCard.addCard(player, Resource.WOOD);
+        servicePlayResCard.addCard(player, Resource.WOOD);
+        servicePlayResCard.addCard(player, Resource.WOOD);
+
+        //give 4 of WOOD for 2 WHEAT, but player2 is not in the game
+        assertThrows(UserNotFoundException.class, () -> servicePlayer.updateCardsAfterTradingWithPlayer(player.getId(), 0, Resource.WOOD, Resource.WHEAT, 4, 2));  
+
+    }
+
+    @Test
+    void getColors(){
+        assertEquals(servicePlayer.getColor(0), Color.RED);
+        assertEquals(servicePlayer.getColor(1), Color.BLUE);
+        assertEquals(servicePlayer.getColor(2), Color.YELLOW);
+        assertEquals(servicePlayer.getColor(3), Color.WHITE);
+    }
+
+    @Test
+    void getColorsException(){
+        assertThrows(IncorrectGamesNumberException.class, () -> servicePlayer.getColor(4));
     }
 }

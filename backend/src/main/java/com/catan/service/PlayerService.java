@@ -133,13 +133,15 @@ public class PlayerService {
     /**
      * Takes four units of the specified resource from the player with the specified id. Then, it adds to the player's resources one unit of the specified resource from the bank.
      * @exception UserNotFoundException if the player with the specified id is not saved in the repository
+     * @exception ResourceCardNotFoundException if the player with the specified id does not have cards saved in the repository
      * @param playerId id of the player who is trading with the bank
      * @param resourceFromPlayer resource type the player gives the bank
      * @param resourceFromBank resource type the bank gives the player
      */
     public void updateCardsAfterTradingWithBank(int playerId, Resource resourceFromPlayer, Resource resourceFromBank){
-        for(int i = 0; i < 4; i++)
+        for(int j = 0; j < 4; j++){
             playerResourceCardService.deleteResourceFromPlayer(playerId, resourceFromPlayer);
+        }
         Player playerDB = this.getPlayerById(playerId);
         playerResourceCardService.addCard(playerDB, resourceFromBank);
     }
