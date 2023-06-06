@@ -2,6 +2,7 @@ package com.catan.service;
 
 import com.catan.exceptions.IncorrectGamesNumberException;
 import com.catan.exceptions.PlayerAlreadyExistsException;
+import com.catan.exceptions.TooManyPlayersException;
 import com.catan.exceptions.UserAlreadyExistsException;
 import com.catan.exceptions.UserNotFoundException;
 import com.catan.model.Color;
@@ -189,7 +190,7 @@ public class PlayerService {
 
     /**
      * Returns the color corresponding to the parameter provided. This method is called by GameService to provide the color for the new players.
-     * @exception IncorrectGamesNumberException if the number is not in the range of the Color class
+     * @exception TooManyPlayersException if the number is not in the range of numbers from 0 to 3 (number of colors in Color class)
      * @param size number of color to get
      * @return the color associated to the size parameter
      */
@@ -199,7 +200,7 @@ public class PlayerService {
             case 1 -> Color.BLUE;
             case 2 -> Color.YELLOW;
             case 3 -> Color.WHITE;
-            default -> throw new IncorrectGamesNumberException("Problem with number of games in choosing color");
+            default -> throw new TooManyPlayersException("Problem with the number of players when choosing a color");
         };
     }
 }

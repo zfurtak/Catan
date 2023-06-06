@@ -9,6 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * Repository to save PlayerResourceCard objects.
+ */
 public interface PlayerResourceCardRepository extends JpaRepository<PlayerResourceCard, Integer> {
     /**
      * Returns a list with all the resource cards from the player with the specified id.

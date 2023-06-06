@@ -30,6 +30,10 @@ import com.catan.service.PlayerResourceCardService;
 import com.catan.service.PlayerService;
 import com.catan.service.UserService;
 
+/**
+ * Tests for methods from PlayerResourceCardService class.
+ * @author Minerva Gomez
+ */
 @SpringBootTest
 public class PlayerResourceCardServiceTest {
     
@@ -58,9 +62,7 @@ public class PlayerResourceCardServiceTest {
     private GameService serviceGame;
 
     private User user;
-    private User user2;
     private Player player;
-    private Player player2;
     private Game game;
 
     @BeforeEach

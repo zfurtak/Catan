@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Service for the Field class
+ * Service for the Field class.
  */
 @Service
 public class FieldService {

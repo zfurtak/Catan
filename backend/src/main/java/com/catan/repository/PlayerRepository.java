@@ -5,6 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
+/**
+ * Repository to save Player objects.
+ */
 @Repository
 public interface PlayerRepository extends JpaRepository<Player, Integer>{
 

@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Handler for Building
+ * Handler class for building.
  */
 @Component
 public class BuildHandler {

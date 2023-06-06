@@ -16,6 +16,7 @@ import java.util.Optional;
 import com.catan.exceptions.IncorrectGamesNumberException;
 import com.catan.exceptions.PlayerAlreadyExistsException;
 import com.catan.exceptions.ResourceCardNotFoundException;
+import com.catan.exceptions.TooManyPlayersException;
 import com.catan.exceptions.UserNotFoundException;
 import com.catan.model.Color;
 import com.catan.model.Player;
@@ -32,6 +33,10 @@ import com.catan.service.PlayerResourceCardService;
 import com.catan.service.PlayerService;
 import com.catan.service.UserService;
 
+/**
+ * Tests for methods from PlayerService class.
+ * @author Minerva Gomez
+ */
 @SpringBootTest
 public class PlayerServiceTest {
     
@@ -393,6 +398,8 @@ public class PlayerServiceTest {
 
     @Test
     void getColorsException(){
-        assertThrows(IncorrectGamesNumberException.class, () -> servicePlayer.getColor(4));
+        assertThrows(TooManyPlayersException.class, () -> servicePlayer.getColor(4));
     }
+
+
 }

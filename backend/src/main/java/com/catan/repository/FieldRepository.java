@@ -8,6 +8,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.beans.VetoableChangeListener;
 import java.util.List;
 
+/**
+ * Repository to save Field objects.
+ */
 public interface FieldRepository extends JpaRepository<Field, Integer> {
 
     /**

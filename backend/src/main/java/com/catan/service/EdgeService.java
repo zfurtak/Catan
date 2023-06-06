@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 /**
- * Service for the Edge class
+ * Service for the Edge class.
  */
 @Service
 public class EdgeService {

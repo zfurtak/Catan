@@ -4,7 +4,7 @@ import com.catan.exceptions.BadResourceNumberException;
 import com.catan.model.Resource;
 
 /**
- * Class for managing Trading with the Bank
+ * Class for managing Trading with the Bank.
  */
 public class TradeWithBankDTO {
     private final int resourceFromPlayer;

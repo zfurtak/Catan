@@ -23,6 +23,7 @@ public class GameService {
     private final GameRepository gameRepository;
     private final PlayerService playerService;
     private final UserService userService;
+    private final PlayerResourceCardService playerResourceCardService;
 
     /**
      * Initialize the service.
@@ -33,26 +34,30 @@ public class GameService {
     @Autowired
     public GameService(GameRepository gameRepository,
                        PlayerService playerService,
-                       UserService userService) {
+                       UserService userService,
+                       PlayerResourceCardService playerResourceCardService) {
         this.gameRepository = gameRepository;
         this.playerService = playerService;
         this.userService = userService;
+        this.playerResourceCardService = playerResourceCardService;
     }
 
     /**
      * Creates a player from the user with the specified id and let's it join a game. If there aren't any games it will call createGame.
      * @param userId id of the user that is going to join
      * @return game the player has joined to
+     * @author Zuzanna Furtak
+     * @author Minerva Gomez
      */
     public Game joinGame(int userId) {
         User user = userService.getUserById(userId);
         List<Game> games = gameRepository.findAll();
-        Player player = playerService.createPlayer(user, playerService.getColor(games.size()));
-
         if (games.isEmpty()) {
+            Player player = playerService.createPlayer(user, playerService.getColor(games.size()));
             return createGame(player);
         } else {
             Game game = games.get(0);
+            Player player = playerService.createPlayer(user, playerService.getColor(game.getPlayers().size()));
             return this.joinExistingGame(game, player);
         }
     }
@@ -61,6 +66,7 @@ public class GameService {
      * Creates a new game and makes the specified player join the game.
      * @param initialPlayer player who will join the new game
      * @return the created game
+     * @author Zuzanna Furtak
      */
     public Game createGame(Player initialPlayer) {
         List<Player> players = new ArrayList<>();
@@ -86,11 +92,12 @@ public class GameService {
     }
 
     /**
-     * Returns the game the player has just joined.
+     * It lets the specified player join the specified game. Returns the game the player has just joined.
      * @exception TooManyPlayersException if there are already four players in the game
      * @param game the game the player is going to join
      * @param newPlayer the player who wants to join
      * @return the game the player has joined
+     * @author Zuzanna Furtak
      */
     public Game joinExistingGame(Game game, Player newPlayer) {
         if (game.getPlayers().size() < 4) {
@@ -108,6 +115,7 @@ public class GameService {
     public void deleteGame(int id) {
         gameRepository.deleteAll();
         // not sure if it is needed (Cascade = Cascade.ALL)
+        //the players' resource cards don't get erased and I am not sure if the board is still there
         playerService.deletePlayers();
     }
 

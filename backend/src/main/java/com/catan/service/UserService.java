@@ -90,6 +90,9 @@ public class UserService {
      * @param username username of the user to be returned
      * @param password password of the user to be returned
      * @return user with the specified username and password
+     * @author Zuzanna Furtak
+     * @author Agnieszka Lasek
+     * 
      */
     public User logUserIn(String username, String password){
         User userDB = this.getUserByName(username);
@@ -107,6 +110,8 @@ public class UserService {
      * @param username username of the user to be created
      * @param password password of the user to be created
      * @return new user with the specified username and password
+     * @author Zuzanna Furtak
+     * @author Minerva Gomez
      */
     public User registerUser(String username, String password){
         if(username.length() >= 4){
@@ -114,7 +119,7 @@ public class UserService {
                 User newUser = new User(username, hashPassword(password));
                 return this.userRepository.save(newUser);
             }else{
-                throw new UserAlreadyExistsException("Cannot registry a user that is already in the database");
+                throw new UserAlreadyExistsException("Cannot register a user that is already in the database");
             }
         } else{
             throw new UsernameTooShortException("Usarname provided is too short, it has less than 4 characters");

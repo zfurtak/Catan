@@ -7,6 +7,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+/**
+ * Repository to save User objects.
+ */
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
 

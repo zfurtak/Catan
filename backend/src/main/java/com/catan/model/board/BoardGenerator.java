@@ -6,6 +6,12 @@ import com.catan.service.VertexService;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class used to generate a board. This is made of objects from the classes Field, Edge and Vertex.
+ * @author Zuzanna Furtak
+ * @author Ivan Iroslavov
+ * @author Rodrigo Carreira
+ */
 public final class BoardGenerator {
     private static final int NUM_OF_EDGES = 72;
     private static final int NUM_OF_VERTICES = 54;
@@ -14,6 +20,10 @@ public final class BoardGenerator {
 
     }
 
+    /**
+     * Generates a board and returns a list with the generated fields.
+     * @return list with the generated fields
+     */
     public static List<Field> generateFields(){
         List<Field> fields = new ArrayList<>();
         List<Edge> edges = new ArrayList<>();

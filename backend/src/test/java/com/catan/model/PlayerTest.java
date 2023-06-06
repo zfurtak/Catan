@@ -9,6 +9,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Tests for methods from Player class.
+ * @author Minerva Gomez
+ * @author Ivan Iroslavov
+ */
 @SpringBootTest
 public class PlayerTest {
 
