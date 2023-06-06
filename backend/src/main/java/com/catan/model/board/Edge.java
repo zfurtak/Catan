@@ -26,6 +26,8 @@ public class Edge {
     @ManyToMany(mappedBy = "edges")
     List<Vertex> vertices;
 
+    Color colorOfEdge;
+
     public Color getColorOfEdge() {
         if (this.getRoad() != null) return this.getRoad().getPlayer().getColor();
         return null;

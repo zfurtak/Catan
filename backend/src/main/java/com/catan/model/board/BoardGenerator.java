@@ -1,5 +1,6 @@
 package com.catan.model.board;
 
+import com.catan.model.Color;
 import com.catan.model.Resource;
 import com.catan.service.VertexService;
 
@@ -24,7 +25,7 @@ public final class BoardGenerator {
         }
 
         for(int i = 0; i < NUM_OF_EDGES; i++){
-            edges.add(new Edge(i, null, null));
+            edges.add(new Edge(i, null, null, Color.BLUE));
         }
         // 0 es piedra, 1 es wool, 9 es wood, 12 es wheat, 6 es brick
         fields.add(new Field(0, Resource.STONE, 10, false, //S
