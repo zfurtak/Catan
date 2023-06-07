@@ -15,19 +15,16 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/players")
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.OPTIONS})
 public class PlayerController {
-    private final VictoryPointsHandler victoryPointsHandler;
+//    private final VictoryPointsHandler victoryPointsHandler;
+//
+//    public PlayerController(VictoryPointsHandler victoryPointsHandler) {
+//        this.victoryPointsHandler = victoryPointsHandler;
+//    }
 
-    public PlayerController(VictoryPointsHandler victoryPointsHandler) {
-        this.victoryPointsHandler = victoryPointsHandler;
-    }
-
-    // GET - makeTradeOffer (listOfItems)
-    // PUT - confirmTrade - we have current player id in Game
-
-    @Operation(summary = "", description = "Recalculates the victory points of the player based on" +
-            "the length of its largest path in the map")
-    @PutMapping(value = "updateVictoryPoints/{playerId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Player updateVictoryPoints(@PathVariable int playerId) {
-        return victoryPointsHandler.updateVictoryPoints(playerId);
-    }
+//    @Operation(summary = "", description = "Recalculates the victory points of the player based on" +
+//            "the length of its largest path in the map")
+//    @PutMapping(value = "updateVictoryPoints/{playerId}", consumes = MediaType.APPLICATION_JSON_VALUE)
+//    public Player updateVictoryPoints(@PathVariable int playerId) {
+//        return victoryPointsHandler.updateVictoryPoints(playerId);
+//    }
 }

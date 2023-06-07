@@ -11,6 +11,9 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Handler class for building.
+ */
 @Component
 public class BuildHandler {
 
@@ -21,7 +24,15 @@ public class BuildHandler {
     private final VertexService vertexService;
     private final PlayerResourceCardService playerResourceCardService;
 
-
+/**
+ * Initialize the handler.
+ * @param gameService the Game service associated to this handler
+ * @param fieldService the Field service associated to this handler
+ * @param playerService the player service associated to this handler
+ * @param edgeService the Edge service associated to this handler
+ * @param vertexService the Vertex service associated to this handler
+ * @param playerResourceCardService the PlayerResourceCard service associated to this handler
+ */
     public BuildHandler(GameService gameService,
                         FieldService fieldService,
                         PlayerService playerService,
@@ -39,6 +50,13 @@ public class BuildHandler {
     // we cannot build a road if it doesn't have direct connection with road or building in the same color
     // or if the edge is already taken
     // TODO: needs to be tested
+    /**
+     * Builds a road for the player with the specified id in the specified edge. Places the building and takes the resource cards necessary from the player. Returns the game where this action is happening.
+     * @exception BuildingUnavailableException if the player does not have enough resources, the edge is occupied with another road or it is not directly connected to a road or building from the player.
+     * @param playerId id of the player that builds
+     * @param edge edge where the road is built
+     * @return game where this action is activated
+     */
     public Game buildRoad(int playerId, Edge edge){
         Edge edgeDB = edgeService.getEdge(edge.getId());
         if(edgeDB.getRoad() != null){
@@ -79,6 +97,13 @@ public class BuildHandler {
         throw new BuildingUnavailableException("You cannot build road here");
     }
 
+    /**
+     * Builds a village for the player with the specified id in the specified vertex. Places the building and takes the resource cards necessary from the player. Returns the game where this action is happening.
+     * @exception BuildingUnavailableException if the player does not have enough resources or the vertex is occupied with another building
+     * @param playerId id of the player that builds
+     * @param vertex vertex where the village is built
+     * @return game where this action is activated
+     */
     public Game buildVillage(int playerId, Vertex vertex) {
         Vertex vertexDB = vertexService.getVertex(vertex);
         if(vertexDB.getBuilding() != null){
@@ -124,6 +149,13 @@ public class BuildHandler {
         return gameService.getGame();
     }
 
+    /**
+     * Builds a city for the player with the specified id in the specified vertex. Places the building and takes the resource cards necessary from the player. It is necessary for the player to have already built a village on the vertex. Returns the game where this action is happening.
+     * @exception BuildingUnavailableException if the player does not have enough resources or if there is not a village in the vertex belonging to the player
+     * @param playerId id of the player that builds
+     * @param vertex vertex where the city is built
+     * @return game where this action is activated
+     */
     public Game buildCity(int playerId, Vertex vertex) {
         Vertex vertexDB = vertexService.getVertex(vertex);
         if(vertexDB.getBuilding() != null && vertexDB.getBuilding().getPlayer().getId() == playerId){
@@ -141,6 +173,12 @@ public class BuildHandler {
         throw new BuildingUnavailableException("You cannot build the city here");
     }
 
+    /**
+     * Returns true if the specified player has enough resources to build a building of the specified type.
+     * @param buildingType type of the building the player wants to build
+     * @param playerId id of the player trying to build
+     * @return boolean that is true if the player has enough resources, else false
+     */
     private boolean hasEnoughResourcesToBuild(BuildingType buildingType, int playerId) {
         Map<Resource, Integer> resources = playerService.getPlayerResources(playerId);
         if(buildingType == null) {
