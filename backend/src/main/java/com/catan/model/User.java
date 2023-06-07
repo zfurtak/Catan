@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 @Entity
 @Table(name = "User")
 @NoArgsConstructor
@@ -21,6 +22,11 @@ public class User {
     private String password;
     private int rankingPoints;
 
+    /**
+     * 
+     * @param username
+     * @param password
+     */
     public User(String username, String password){
         this.username = username;
         this.password = password;

@@ -12,7 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class DevelopentCard {
+public class DevelopmentCard {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,4 +20,5 @@ public class DevelopentCard {
 
     private String name;
     private String description;
+
 }

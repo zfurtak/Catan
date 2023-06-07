@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "PlayerDevCards")
 @NoArgsConstructor
@@ -24,5 +26,6 @@ public class PlayerDevCards {
 
     @ManyToOne
     @JoinColumn(name = "development_card_id", referencedColumnName = "id")
-    private DevelopentCard developentCard;
+    private DevelopmentCard developmentCard;
+
 }
