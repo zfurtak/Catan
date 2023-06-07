@@ -14,6 +14,10 @@ public class UsernameTooShortException extends RuntimeException{
      * @author Minerva Gomez
      */
     public UsernameTooShortException(String message) {
-        super(message, new Throwable(AUTH_EXCEPTION_ERROR_CODE));
+        new UsernameTooShortException(message, new Throwable(AUTH_EXCEPTION_ERROR_CODE));
+    }
+
+    public UsernameTooShortException(String message, Throwable cause) {
+        super(message, cause);
     }
 }

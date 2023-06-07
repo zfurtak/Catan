@@ -140,9 +140,8 @@ public class PlayerService {
      * @param resourceFromBank resource type the bank gives the player
      */
     public void updateCardsAfterTradingWithBank(int playerId, Resource resourceFromPlayer, Resource resourceFromBank){
-        for(int j = 0; j < 4; j++){
-            playerResourceCardService.deleteResourceFromPlayer(playerId, resourceFromPlayer);
-        }
+        for(int i = 0; i < 4; i++)
+            playerResourceCardService.deleteByPlayerIdAndResource(playerId, resourceFromPlayer);
         Player playerDB = this.getPlayerById(playerId);
         playerResourceCardService.addCard(playerDB, resourceFromBank);
     }
@@ -161,23 +160,13 @@ public class PlayerService {
         Player offeringPlayerDB = getPlayerById(offeringPlayerId);
         Player acceptingPlayerDB = getPlayerById(acceptingPlayerId);
         for (int i=0; i<numResourcesOffered; i++){
-            playerResourceCardService.deleteResourceFromPlayer(offeringPlayerId, resourceOffered);
+            playerResourceCardService.deleteByPlayerIdAndResource(offeringPlayerId, resourceOffered);
             playerResourceCardService.addCard(acceptingPlayerDB, resourceOffered);
         }
         for (int i=0; i<numResourcesToGet; i++){
-            playerResourceCardService.deleteResourceFromPlayer(acceptingPlayerId, resourceToGet);
+            playerResourceCardService.deleteByPlayerIdAndResource(acceptingPlayerId, resourceToGet);
             playerResourceCardService.addCard(offeringPlayerDB, resourceToGet);
         }
-    }
-
-    /**
-     * Updates the victory points of the player with the specified id, using the new number specified in the points parameter. It returns the player with the updated points.
-     * @param id id of the player whose victory points will be updated
-     * @param points number of victory points to be set
-     * @return player with the updated victory points
-     */
-    public Player updateVictoryPoints(int id, int points) {
-        return updateVictoryPoints(this.getPlayerById(id), points);
     }
 
     /**

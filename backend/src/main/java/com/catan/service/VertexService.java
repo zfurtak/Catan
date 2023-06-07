@@ -1,9 +1,15 @@
 
 package com.catan.service;
 
+import com.catan.exceptions.UserNotFoundException;
+import com.catan.model.board.Edge;
+import com.catan.model.board.Field;
 import com.catan.model.board.Vertex;
+import com.catan.model.board.Building;
 import com.catan.repository.VertexRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -45,4 +51,5 @@ public class VertexService {
             return vertexDB.get();
         }
     }
+
 }

@@ -1,5 +1,6 @@
 package com.catan.service;
 
+import com.catan.model.Color;
 import com.catan.model.board.Edge;
 import com.catan.model.board.Field;
 import com.catan.model.board.Vertex;

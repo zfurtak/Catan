@@ -52,7 +52,7 @@ public class PlayerResourceCardService {
      * @param resource resource type to be deleted
      * @author Minerva Gomez
      */
-    public void deleteResourceFromPlayer(int playerId, Resource resource){
+    public void deleteByPlayerIdAndResource(int playerId, Resource resource){
         List <PlayerResourceCard> resources = this.findAllCardsByPlayerId(playerId);
         PlayerResourceCard resourceToErase = null;
         int i = 0;                                                     
@@ -68,6 +68,10 @@ public class PlayerResourceCardService {
         } else{
             throw new ResourceCardNotFoundException("Trying to delete a card of a resource type the player does not posses.");
         }
+    }
+
+    public List<PlayerResourceCard> getPlayersCardNumber(Player player) {
+        return playerResourceCardRepository.findAllByPlayerId(player.getId());
     }
 
     /**

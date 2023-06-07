@@ -1,8 +1,14 @@
 package com.catan.service;
 
+import com.catan.exceptions.UserNotFoundException;
+import com.catan.model.Color;
+import com.catan.model.Player;
 import com.catan.model.board.Edge;
+import com.catan.model.board.Field;
 import com.catan.repository.EdgeRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -30,7 +36,7 @@ public class EdgeService {
      */
     public Edge getEdge(int edgeId){
         Optional<Edge> edgeDB = edgeRepository.findById(edgeId);
-        if (edgeDB.isEmpty()) {
+        if(edgeDB.isEmpty()) {
             throw new NoSuchElementException("Edge not found");
         } else {
             return edgeDB.get();
@@ -45,4 +51,7 @@ public class EdgeService {
         edgeRepository.save(edge);
     }
 
+    public List<Edge> findAllByColorOfEdge(Color color) {
+        return edgeRepository.findAllByColorOfEdge(color);
+    }
 }

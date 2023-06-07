@@ -80,15 +80,15 @@ public class BuildHandler {
                             if(e.getId() != edgeDB.getId() && e.getRoad() != null
                                     && e.getColorOfEdge() == playerDB.getColor()){
                                 edgeService.updateEdge(edgeDB);
-                                playerResourceCardService.deleteResourceFromPlayer(playerId, Resource.BRICK);
-                                playerResourceCardService.deleteResourceFromPlayer(playerId, Resource.WOOD);
+                                playerResourceCardService.deleteByPlayerIdAndResource(playerId, Resource.BRICK);
+                                playerResourceCardService.deleteByPlayerIdAndResource(playerId, Resource.WOOD);
                                 return gameService.getGame();
                             }
                         }
                     }else if(v.getBuilding().getPlayer().getColor() == playerDB.getColor()){
                         edgeService.updateEdge(edgeDB);
-                        playerResourceCardService.deleteResourceFromPlayer(playerId, Resource.BRICK);
-                        playerResourceCardService.deleteResourceFromPlayer(playerId, Resource.WOOD);
+                        playerResourceCardService.deleteByPlayerIdAndResource(playerId, Resource.BRICK);
+                        playerResourceCardService.deleteByPlayerIdAndResource(playerId, Resource.WOOD);
                         return gameService.getGame();
                     }
                 }
@@ -142,10 +142,10 @@ public class BuildHandler {
         building.setPlayer(playerDB);
         building.setType(BuildingType.VILLAGE);
         vertexDB.setBuilding(building);
-        playerResourceCardService.deleteResourceFromPlayer(playerId, Resource.BRICK);
-        playerResourceCardService.deleteResourceFromPlayer(playerId, Resource.WOOD);
-        playerResourceCardService.deleteResourceFromPlayer(playerId, Resource.WOOL);
-        playerResourceCardService.deleteResourceFromPlayer(playerId, Resource.WHEAT);
+        playerResourceCardService.deleteByPlayerIdAndResource(playerId, Resource.BRICK);
+        playerResourceCardService.deleteByPlayerIdAndResource(playerId, Resource.WOOD);
+        playerResourceCardService.deleteByPlayerIdAndResource(playerId, Resource.WOOL);
+        playerResourceCardService.deleteByPlayerIdAndResource(playerId, Resource.WHEAT);
         return gameService.getGame();
     }
 
@@ -163,11 +163,11 @@ public class BuildHandler {
                 throw new BuildingUnavailableException("Not enough resources");
             }
             vertexDB.getBuilding().setType(BuildingType.CITY);
-            playerResourceCardService.deleteResourceFromPlayer(playerId, Resource.WHEAT);
-            playerResourceCardService.deleteResourceFromPlayer(playerId, Resource.WHEAT);
-            playerResourceCardService.deleteResourceFromPlayer(playerId, Resource.STONE);
-            playerResourceCardService.deleteResourceFromPlayer(playerId, Resource.STONE);
-            playerResourceCardService.deleteResourceFromPlayer(playerId, Resource.STONE);
+            playerResourceCardService.deleteByPlayerIdAndResource(playerId, Resource.WHEAT);
+            playerResourceCardService.deleteByPlayerIdAndResource(playerId, Resource.WHEAT);
+            playerResourceCardService.deleteByPlayerIdAndResource(playerId, Resource.STONE);
+            playerResourceCardService.deleteByPlayerIdAndResource(playerId, Resource.STONE);
+            playerResourceCardService.deleteByPlayerIdAndResource(playerId, Resource.STONE);
             return gameService.getGame();
         }
         throw new BuildingUnavailableException("You cannot build the city here");
