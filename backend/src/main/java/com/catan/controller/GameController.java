@@ -91,24 +91,18 @@ public class GameController {
         return gameService.tradeWithPlayer(playerOfferingId, playerAcceptingId, tradingDTO);
     }
 
-    @Operation(summary = "", description = "Perfoms the operation of building a road if it is possible for " +
-            "that player to build it there")
     @PutMapping(value="/buildRoad/{playerId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Game buildRoad(@PathVariable int playerId,
                           @RequestBody Edge edge){
         return buildHandler.buildRoad(playerId, edge);
     }
 
-    @Operation(summary = "", description = "Perfoms the operation of building a village if it is possible for " +
-            "that player to build it there")
     @PutMapping(value = "/buildVillage/{playerId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Game buildVillage(@PathVariable int playerId,
                              @RequestBody Vertex vertex) {
         return buildHandler.buildVillage(playerId, vertex);
     }
 
-    @Operation(summary = "", description = "Perfoms the operation of building a city if it is possible for " +
-            "that player to build it there")
     @PutMapping(value = "/buildCity/{playerId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Game buildCity(@PathVariable int playerId,
                              @RequestBody Vertex vertex) {

@@ -1,8 +1,6 @@
 package com.catan.model.board;
 
-import com.catan.model.Color;
 import com.catan.model.Resource;
-import com.catan.service.VertexService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +33,7 @@ public final class BoardGenerator {
         }
 
         for(int i = 0; i < NUM_OF_EDGES; i++){
-            edges.add(new Edge(i, null, null, null));
+            edges.add(new Edge(i, null, null));
         }
         // 0 es piedra, 1 es wool, 9 es wood, 12 es wheat, 6 es brick
         fields.add(new Field(0, Resource.STONE, 10, false, //S
@@ -94,7 +92,7 @@ public final class BoardGenerator {
                 new ArrayList<>(List.of(vertices.get(14), vertices.get(19), vertices.get(28),
                         vertices.get(29), vertices.get(24), vertices.get(15)))));
         // Dessert blocked in the beginning
-        fields.add(new Field(9, Resource.DESSERT, -1, true, //S
+        fields.add(new Field(9, Resource.DESERT, -1, true, //S
                 new ArrayList<>(List.of(edges.get(22), edges.get(26), edges.get(38),
                         edges.get(39), edges.get(40), edges.get(36))),
                 new ArrayList<>(List.of(vertices.get(18), vertices.get(21), vertices.get(30),

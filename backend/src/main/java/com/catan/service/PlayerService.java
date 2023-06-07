@@ -161,9 +161,16 @@ public class PlayerService {
         }
     }
 
+<<<<<<< HEAD
     /**
      * Deletes all the players in the player's repository
      */
+=======
+    public Player updateVictoryPoints(int id, int points) {
+        return updateVictoryPoints(this.getPlayerById(id), points);
+    }
+
+>>>>>>> parent of c87d2c9 (updateVictoryPoints functionality Implemented)
     public void deletePlayers() {
         playerRepository.deleteAll();
     }
