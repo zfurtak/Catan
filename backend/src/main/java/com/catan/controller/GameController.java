@@ -15,14 +15,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -58,7 +51,7 @@ public class GameController {
 
     @Operation(summary = "", description = "If user is the first to join the game, game is created, otherwise"+
         "existing, waiting game is updated with new player (player is a temporary object for user during the game")
-    @PutMapping(value = "/joinGame/{userId}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/joinGame/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Game joinToTheGame(@PathVariable int userId) {
         return gameService.joinGame(userId);
     }
@@ -120,5 +113,10 @@ public class GameController {
     public Game buildCity(@PathVariable int playerId,
                              @RequestBody Vertex vertex) {
         return buildHandler.buildCity(playerId, vertex);
+    }
+
+    @DeleteMapping()
+    public void deleteGame(){
+        gameService.deleteAllGames();
     }
 }

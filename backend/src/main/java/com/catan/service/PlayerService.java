@@ -40,15 +40,12 @@ public class PlayerService {
 
     public Player createPlayer(User user, Color color) {
         Optional<Player> playerDB = playerRepository.findByUserId(user.getId());
-        if (playerDB.isPresent()) {
-            //TODO add proper exception
-            throw new UserAlreadyExistsException("Player is already created");
-        } else {
-            Player p = new Player();
-            p.setColor(color);
-            p.setUser(user);
-            return p;
-        }
+        playerDB.ifPresent(player -> playerRepository.deleteById(player.getId()));
+        Player p = new Player();
+        p.setColor(color);
+        p.setUser(user);
+        return p;
+
     }
 
     public Player addPlayer(Player player) {

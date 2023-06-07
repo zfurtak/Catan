@@ -32,7 +32,11 @@ public class GameService {
     public Game joinGame(int userId) {
         User user = userService.getUserById(userId);
         List<Game> games = gameRepository.findAll();
-        Player player = playerService.createPlayer(user, playerService.getColor(games.size()));
+        int color = 0;
+        if(!games.isEmpty()){
+            color = games.get(0).getPlayers().size();
+        }
+        Player player = playerService.createPlayer(user, playerService.getColor(color));
 
         if (games.isEmpty()) {
             return createGame(player);
@@ -119,12 +123,7 @@ public class GameService {
         return getGame();
     }
 
-
-    // player sends us an edge where he wants to build
-    // we check if it is empty
-    // then we check if vertices
-    public Game buildRoad(int playerId){
-        return getGame();
+    public void deleteAllGames(){
+        gameRepository.deleteAll();
     }
-
 }

@@ -68,12 +68,12 @@ public class UserController {
         return userService.getUserById(id);
     }
 
-    @PostMapping(value = "/joinGame/{id}", consumes = {MediaType.APPLICATION_JSON_VALUE})
-    @Operation(summary = "", description = "Adds player to the game with user id if is already " +
-                                           "registered and the game is not full.")
-    public Game joinNewPlayer(@PathVariable int id) {
-        return gameService.joinGame(id);
-    }
+//    @PostMapping(value = "/joinGame/{id}", consumes = {MediaType.APPLICATION_JSON_VALUE})
+//    @Operation(summary = "", description = "Adds player to the game with user id if is already " +
+//                                           "registered and the game is not full.")
+//    public Game joinNewPlayer(@PathVariable int id) {
+//        return gameService.joinGame(id);
+//    }
 
     @DeleteMapping(value = "/deleteUserById/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
     @Operation(summary = "", description = "Deletes user from the database if is already registered.")
