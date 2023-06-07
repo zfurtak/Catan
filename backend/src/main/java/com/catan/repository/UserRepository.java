@@ -7,8 +7,16 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+/**
+ * Repository to save User objects.
+ */
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
 
+    /**
+     * Returns the user with the specified username. If it is not saved in the repository it will return null.
+     * @param name username of the user to be found
+     * @return user if found, else null
+     */
     Optional<User> findByUsername(String name);
 }
