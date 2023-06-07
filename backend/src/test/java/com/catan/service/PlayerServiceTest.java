@@ -176,15 +176,6 @@ public class PlayerServiceTest {
         player = servicePlayer.updateVictoryPoints(player, 3);
         assertEquals(3, player.getVictoryPoints() );
     }
-
-    @Test
-    void updateVictoryPointsFromId(){
-        user = serviceUser.registerUser("user", "pass");
-        game = serviceGame.joinGame(user.getId()); 
-        player = game.getPlayers().get(0);
-        player = servicePlayer.updateVictoryPoints(player.getId(), 3);
-        assertEquals(3, player.getVictoryPoints());
-    }
    
     @Test
     void deleteAllPlayers(){

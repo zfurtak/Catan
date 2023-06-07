@@ -6,12 +6,12 @@ import com.catan.model.PlayerResourceCard;
 import com.catan.model.Resource;
 import com.catan.repository.PlayerResourceCardRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
- * Service for the PlayerResourceCard class
+ * Service for the PlayerResourceCard class.
+ * @author Minerva Gomez
  */
 @Service
 public class PlayerResourceCardService {

@@ -20,7 +20,9 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Service for the User class
+ * Service for the User class.
+ * @author Zuzanna Furtak
+ * @author Minerva Gomez
  */
 @Service
 public class UserService {

@@ -23,7 +23,10 @@ import com.catan.model.User;
 import com.catan.repository.UserRepository;
 import com.catan.service.UserService;
 
-
+/**
+ * Tests for User and UserService.
+ * @author Minerva Gomez
+ */
 @SpringBootTest
 public class UserTest {
 

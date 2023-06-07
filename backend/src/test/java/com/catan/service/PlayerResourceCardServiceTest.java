@@ -123,7 +123,7 @@ public class PlayerResourceCardServiceTest {
 
         assertEquals(2, resources.size());
 
-        servicePlayResCard.deleteResourceFromPlayer(player.getId(), Resource.STONE);
+        servicePlayResCard.deleteByPlayerIdAndResource(player.getId(), Resource.STONE);
 
         resources = servicePlayResCard.findAllCardsByPlayerId(player.getId());
 
@@ -137,12 +137,12 @@ public class PlayerResourceCardServiceTest {
         game = serviceGame.joinGame(user.getId()); 
         player = game.getPlayers().get(0);
 
-        assertThrows(ResourceCardNotFoundException.class, () -> servicePlayResCard.deleteResourceFromPlayer(0, Resource.STONE));
+        assertThrows(ResourceCardNotFoundException.class, () -> servicePlayResCard.deleteByPlayerIdAndResource(0, Resource.STONE));
     }
 
     @Test
     void deleteResourceFromNonExistingPlayer(){
-        assertThrows(ResourceCardNotFoundException.class, () -> servicePlayResCard.deleteResourceFromPlayer(0, Resource.STONE));
+        assertThrows(ResourceCardNotFoundException.class, () -> servicePlayResCard.deleteByPlayerIdAndResource(0, Resource.STONE));
     }
 
     @Test
