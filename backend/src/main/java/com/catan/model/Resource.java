@@ -9,5 +9,5 @@ public enum Resource {
     WOOL,
     WHEAT,
     STONE,
-    DESSERT
+    DESERT
 }
