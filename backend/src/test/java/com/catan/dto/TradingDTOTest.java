@@ -33,7 +33,7 @@ class TradingDTOTest {
     public void testConvertResourceToGet() {
         TradingDTO tradingDTO = new TradingDTO(2, 3, 5, 2); // Assuming resourceToGet = 5
         Resource resourceToGet = tradingDTO.convertResourceToGet();
-        Assertions.assertEquals(Resource.DESSERT, resourceToGet);
+        Assertions.assertEquals(Resource.DESERT, resourceToGet);
     }
 
     @Test

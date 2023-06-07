@@ -1,12 +1,7 @@
 package com.catan.controller;
 
-import com.catan.handler.VictoryPointsHandler;
-import com.catan.model.Game;
-import com.catan.model.Player;
 import com.catan.service.PlayerService;
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 
