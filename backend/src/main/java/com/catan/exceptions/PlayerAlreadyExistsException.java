@@ -2,6 +2,7 @@ package com.catan.exceptions;
 
 /**
  * Thrown to indicate that a method has tried to save a player in the database that is already saved in there.
+ * @author rorro6787
  */
 public class PlayerAlreadyExistsException extends RuntimeException{
     private static final String AUTH_EXCEPTION_ERROR_CODE = "409";

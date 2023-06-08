@@ -2,6 +2,7 @@ package com.catan.exceptions;
 
 /**
  * Thrown to indicate that a method has tried to retrieve from the database a User that is not saved in the database.
+ * @author rorro6787
  */
 public class UserNotFoundException extends RuntimeException{
     private static final String AUTH_EXCEPTION_ERROR_CODE = "404";

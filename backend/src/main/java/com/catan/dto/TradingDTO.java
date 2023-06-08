@@ -6,6 +6,7 @@ import com.catan.model.Resource;
 // TODO: reformat code somehow?
 /**
  * Class for managing general Trading.
+ * @author rorro6787
  */
 public class TradingDTO {
     private final int resourceFromPlayer;

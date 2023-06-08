@@ -15,6 +15,7 @@ import java.util.List;
 
 /**
  * Handler for updating players' victory points
+ * @author rorro6787
  */
 @Component
 public class VictoryPointsHandler {

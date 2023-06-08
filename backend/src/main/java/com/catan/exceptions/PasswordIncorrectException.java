@@ -2,6 +2,7 @@ package com.catan.exceptions;
 
 /**
  * Thrown to indicate that a Player has tried to log in with an incorrect password.
+ * @author rorro6787
  */
 public class PasswordIncorrectException extends RuntimeException{
     private static final String AUTH_EXCEPTION_ERROR_CODE = "401";

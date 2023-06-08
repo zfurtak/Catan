@@ -22,6 +22,7 @@ public final class BoardGenerator {
     /**
      * Generates a board and returns a list with the generated fields.
      * @return list with the generated fields
+     * @author rorro6787
      */
     public static List<Field> generateFields(){
         List<Field> fields = new ArrayList<>();
