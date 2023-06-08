@@ -5,6 +5,7 @@ import com.catan.model.Resource;
 
 /**
  * Class for managing Trading with the Bank.
+ * @author rorro6787
  */
 public class TradeWithBankDTO {
     private final int resourceFromPlayer;

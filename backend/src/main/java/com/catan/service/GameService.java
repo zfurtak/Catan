@@ -132,6 +132,15 @@ public class GameService {
     }
 
     // we assume that player can exchange, because before we send list of available resources
+
+    /**
+     *
+     * @param
+     * @param
+     * @return
+     * @author rorro6787
+     * @author zuzka
+     */
     public Game tradeWithBank(int playerId, TradingDTO tradingDTO){
         Resource resourceFromPlayer = tradingDTO.convertPlayerResourceFromInt();
         Resource resourceFromBank = tradingDTO.convertBankResourceFromInt();
