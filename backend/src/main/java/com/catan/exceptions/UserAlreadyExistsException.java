@@ -2,6 +2,7 @@ package com.catan.exceptions;
 
 /**
  * Thrown to indicate that a method has tried to save a user in the databse that is already saved in there.
+ * @author Zuzanna Furtak
  * @author rorro6787
  */
 public class UserAlreadyExistsException extends RuntimeException{

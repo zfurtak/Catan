@@ -1,7 +1,8 @@
 package com.catan.exceptions;
 
 /**
- * Thrown to indicate that a player is trying to trade a resource in exchange of the saem resource.
+ * Thrown to indicate that a player is trying to trade a resource in exchange for the saem resource.
+ * @author Zuzanna Furtak
  * @author rorro6787
  */
 public class BadTradingException extends RuntimeException {

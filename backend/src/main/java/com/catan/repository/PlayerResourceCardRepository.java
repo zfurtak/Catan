@@ -20,12 +20,5 @@ public interface PlayerResourceCardRepository extends JpaRepository<PlayerResour
      */
     List<PlayerResourceCard> findAllByPlayerId(int playerId);
 
-    /**
-     * Deletes all units of the specified resource type from the player with the specified id.
-     * @param playerId id of the player whose resource is being deleted
-     * @param resource resource type to be deleted
-     */
-    @Transactional
-    void deleteByPlayerIdAndResource(int playerId, Resource resource);
 
 }

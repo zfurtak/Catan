@@ -2,6 +2,7 @@ package com.catan.exceptions;
 
 /**
  * Thrown to indicate that a Player has tried to log in with an incorrect password.
+ * @author Zuzanna Furtak
  * @author rorro6787
  */
 public class PasswordIncorrectException extends RuntimeException{

@@ -44,6 +44,7 @@ public class PlayerService {
      * @exception UserNotFoundException if the player with the specified id is not saved in the repository
      * @param id id of the player to be returned
      * @return player with the specified id
+     * @author Zuzanna Furtak
      */
     public Player getPlayerById(int id) {
         Optional<Player> playerDB = playerRepository.findById(id);
@@ -60,6 +61,7 @@ public class PlayerService {
      * @param user user of the player to be created
      * @param color color of the player to be created
      * @return new player with the specified user and password
+     * @author Zuzanna Furtak
      */
     public Player createPlayer(User user, Color color) {
         Optional<Player> playerDB = playerRepository.findByUserId(user.getId());
@@ -68,15 +70,6 @@ public class PlayerService {
         p.setColor(color);
         p.setUser(user);
         return p;
-    }
-
-    /**
-     * Adds the specified player to the repository. Returns the player that has been added.
-     * @param player player to be added
-     * @return the added player
-     */
-    public Player addPlayer(Player player) {
-        return playerRepository.save(player);
     }
 
     /**
@@ -117,6 +110,7 @@ public class PlayerService {
      * Returns a list with the resources of the player with the specified id that are fit to be traded with the bank. For a resource to be considered fit, the player needs to have at least four units of it.
      * @param playerId id of the player whose resources are got
      * @return list with the numbers corresponding to the resource types that can be traded with the bank
+     * @author Zuzanna Furtak
      */
     public List<Integer> getResourcesToTradeWithBank(int playerId){
         return this.getPlayerResources(playerId).entrySet()
@@ -179,6 +173,7 @@ public class PlayerService {
      * @exception TooManyPlayersException if the number is not in the range of numbers from 0 to 3 (number of colors in Color class)
      * @param size number of color to get
      * @return the color associated to the size parameter
+     * @author Zuzanna Furtak
      */
     public Color getColor(int size){
         return switch (size) {

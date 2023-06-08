@@ -3,10 +3,11 @@ package com.catan.dto;
 import com.catan.exceptions.BadResourceNumberException;
 import com.catan.model.Resource;
 
-// TODO: reformat code somehow?
 /**
  * Class for managing general Trading.
  * @author rorro6787
+ * @author Zuzanna Furtak
+ * @author Agnieszka Lasek
  */
 public class TradingDTO {
     private final int resourceFromPlayer;

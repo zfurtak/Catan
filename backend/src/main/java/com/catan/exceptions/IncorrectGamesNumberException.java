@@ -2,6 +2,7 @@ package com.catan.exceptions;
 
 /**
  * Thrown to indicate that a method has received an incorrect number of games.
+ * @author Zuzanna Furtak
  * @author rorro6787
  */
 public class IncorrectGamesNumberException extends RuntimeException{

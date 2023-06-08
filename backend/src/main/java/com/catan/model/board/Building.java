@@ -1,6 +1,5 @@
 package com.catan.model.board;
 
-import com.catan.model.Color;
 import com.catan.model.Player;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

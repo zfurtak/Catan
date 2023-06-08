@@ -42,6 +42,7 @@ public class UserService {
      * @exception UserNotFoundException if the user with the specified username is not saved in the repository
      * @param username name of the user to be returned
      * @return user with the specified username
+     * @author Zuzanna Furtak
      */
     public User getUserByName(String username) {
         Optional<User> userDB = userRepository.findByUsername(username);
@@ -75,6 +76,7 @@ public class UserService {
      * @exception UserNotFoundException if the user with the specified id is not saved in the repository
      * @param id id from the user to be returned
      * @return user with the specified id
+     * @author Zuzanna Furtak
      */
     public User getUserById(int id) {
         Optional<User> userDB = userRepository.findById(id);
@@ -93,8 +95,6 @@ public class UserService {
      * @param password password of the user to be returned
      * @return user with the specified username and password
      * @author Zuzanna Furtak
-     * @author Agnieszka Lasek
-     * 
      */
     public User logUserIn(String username, String password){
         User userDB = this.getUserByName(username);
@@ -113,7 +113,6 @@ public class UserService {
      * @param password password of the user to be created
      * @return new user with the specified username and password
      * @author Zuzanna Furtak
-     * @author Agnieszka Lasek
      */
     public User registerUser(String username, String password){
         if(username.length() >= 4){
@@ -151,7 +150,6 @@ public class UserService {
      * @param id id of the user to be updated
      * @param newUser user containing the new information to be stored in the user
      * @return the new user after associating it to the specified id
-     * @author Zuzanna Furtak
      * @author Agnieszka Lasek
      */
     public User updateUserById(int id, User newUser){
@@ -160,7 +158,6 @@ public class UserService {
             throw new UserNotFoundException("User not found");
         } else {
             User updatedUser = oldUserDB.get();
-            // TODO: check if we want to be able to change username/password
             updatedUser.setUsername(newUser.getUsername());
             updatedUser.setPassword(hashPassword(newUser.getPassword()));
             updatedUser.setRankingPoints(newUser.getRankingPoints());

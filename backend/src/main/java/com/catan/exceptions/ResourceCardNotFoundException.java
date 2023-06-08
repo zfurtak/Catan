@@ -12,7 +12,6 @@ public class ResourceCardNotFoundException extends RuntimeException{
      * Constructs a {@code ResourceCardNotFoundException} with the
      * specified detail message.
      * @param message the detail message
-     * @author Minerva Gomez
      */
     public ResourceCardNotFoundException(String message) {
         super(message, new Throwable(AUTH_EXCEPTION_ERROR_CODE));

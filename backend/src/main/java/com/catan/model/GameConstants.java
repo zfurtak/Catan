@@ -1,6 +1,5 @@
 package com.catan.model;
 
-// TODO: check total knight and point cards in the deck
 public final class GameConstants {
     public static final int PHASE_TIME_LIMIT = 60;
     public static final int VICTORY_POINTS_REQUIRED = 10;

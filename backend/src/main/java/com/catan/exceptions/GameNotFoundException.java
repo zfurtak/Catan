@@ -2,6 +2,7 @@ package com.catan.exceptions;
 
 /**
  * Thrown to indicate that a method has tried to retrieve from the database a Game that is not saved in the database.
+ * @author Zuzanna Furtak
  * @author rorro6787
  */
 public class GameNotFoundException extends RuntimeException{

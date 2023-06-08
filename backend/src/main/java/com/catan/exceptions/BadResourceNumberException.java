@@ -2,6 +2,7 @@ package com.catan.exceptions;
 
 /**
  * Thrown to indicate that a method is referencing a Resource with a number bigger than 5.
+ * @author Zuzanna Furtak
  * @author rorro6787
  */
 public class BadResourceNumberException extends RuntimeException {

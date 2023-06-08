@@ -12,6 +12,7 @@ import java.util.List;
 /**
  * Handler for the Thief
  * @author Agnieszka Lasek
+ * @author Zuzanna Furtak
  */
 @Component
 public class ThiefHandler {

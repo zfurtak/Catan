@@ -1,7 +1,6 @@
 package com.catan.model;
 
 import com.catan.model.board.Field;
-import com.catan.model.Phase;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,6 +8,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
+
+
+/**
+ * Entity class for game objects, manages the connections in the database
+ * @author Zuzanna Furtak
+ */
 
 @Entity
 @Table(name = "Game")

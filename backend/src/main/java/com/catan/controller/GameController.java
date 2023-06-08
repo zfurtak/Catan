@@ -20,6 +20,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
+/**
+ * Controller class, where endpoints are created, to receive request and send response
+ * Manages endpoints connected to game's actions
+ * @author Zuzanna Furtak
+ * @author Agnieszka Lasek
+ */
+
 @RestController
 @RequestMapping(value = "/game")
 @Tag(name = "Game", description = "Game")

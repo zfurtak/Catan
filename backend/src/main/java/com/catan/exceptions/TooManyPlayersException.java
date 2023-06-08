@@ -2,6 +2,7 @@ package com.catan.exceptions;
 
 /**
  * Thrown to indicate that a method tries to save a new Player when the Game already has four players.
+ * @author Zuzanna Furtak
  * @author rorro6787
  */
 public class TooManyPlayersException extends RuntimeException{

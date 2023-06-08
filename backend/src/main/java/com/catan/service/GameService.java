@@ -22,7 +22,6 @@ public class GameService {
     private final GameRepository gameRepository;
     private final PlayerService playerService;
     private final UserService userService;
-    private final PlayerResourceCardService playerResourceCardService;
 
     /**
      * Initialize the service.
@@ -33,12 +32,10 @@ public class GameService {
     @Autowired
     public GameService(GameRepository gameRepository,
                        PlayerService playerService,
-                       UserService userService,
-                       PlayerResourceCardService playerResourceCardService) {
+                       UserService userService) {
         this.gameRepository = gameRepository;
         this.playerService = playerService;
         this.userService = userService;
-        this.playerResourceCardService = playerResourceCardService;
     }
 
     /**
@@ -116,8 +113,6 @@ public class GameService {
      */
     public void deleteGame(int id) {
         gameRepository.deleteAll();
-        // not sure if it is needed (Cascade = Cascade.ALL)
-        //the players' resource cards don't get erased and I am not sure if the board is still there
         playerService.deletePlayers();
     }
 
@@ -133,11 +128,6 @@ public class GameService {
     // we assume that player can exchange, because before we send list of available resources
 
     /**
-     *
-     * @param
-     * @param
-     * @return
-     * @author rorro6787
      * @author Zuzanna Furtak
      */
     public Game tradeWithBank(int playerId, TradingDTO tradingDTO){
