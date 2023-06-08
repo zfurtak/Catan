@@ -7,6 +7,10 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class used to test the Field class
+ * @author Ivan Iroslavov
+ */
 class FieldTest {
     @Test
     public void testFieldInitialization() {

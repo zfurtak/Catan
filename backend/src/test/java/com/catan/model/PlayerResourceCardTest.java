@@ -7,7 +7,10 @@ import org.mockito.MockitoAnnotations;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
-
+/**
+ * Class used to test the PlayerResourceCard class
+ * @author Ivan Iroslavov
+ */
 class PlayerResourceCardTest {
     @Mock
     private Player mockPlayer;

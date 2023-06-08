@@ -1,12 +1,20 @@
 package com.catan.model.board;
 
 import com.catan.model.Resource;
+import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 
+/**
+ * Class used to test the BoardGenerator class
+ * @author Ivan Iroslavov
+ */
 class BoardGeneratorTest {
     @Test
     public void testGenerateFields() {

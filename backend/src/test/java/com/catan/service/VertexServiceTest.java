@@ -11,6 +11,10 @@ import org.mockito.Mockito;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+/**
+ * Class used to test the VertexService class
+ * @author Ivan Iroslavov
+ */
 public class VertexServiceTest {
 
     private VertexRepository vertexRepository;

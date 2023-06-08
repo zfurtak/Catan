@@ -7,6 +7,7 @@ import com.catan.service.VertexService;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * Class used to generate a board. This is made of objects from the classes Field, Edge and Vertex.
  * @author Zuzanna Furtak

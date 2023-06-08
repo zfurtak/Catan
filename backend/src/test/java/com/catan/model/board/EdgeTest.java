@@ -6,7 +6,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-
+/**
+ * Class used to test the Edge class
+ * @author Ivan Iroslavov
+ */
 class EdgeTest {
     private Player player;
     private Road road;

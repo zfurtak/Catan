@@ -5,7 +5,10 @@ import com.catan.model.Resource;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-
+/**
+ * Class used to test the TradeWithBankDTO class
+ * @author Ivan Iroslavov
+ */
 class TradeWithBankDTOTest {
     //int resourceFromPlayer = 1, resourceFromBank = 0;
     //TradeWithBankDTO tradeTest = new TradeWithBankDTO(resourceFromPlayer, resourceFromBank);

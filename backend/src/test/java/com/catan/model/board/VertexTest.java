@@ -6,6 +6,10 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class used to test the Vertex class
+ * @author Ivan Iroslavov
+ */
 class VertexTest {
     @Test
     public void testVertexInitialization() {

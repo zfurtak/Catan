@@ -3,8 +3,10 @@ package com.catan.dto;
 import com.catan.exceptions.BadResourceNumberException;
 import com.catan.model.Resource;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
+import org.junit.jupiter.api.Test;/**
+ * Class used to test the TradingDTO class
+ * @author Ivan Iroslavov
+ */
 
 class TradingDTOTest {
 

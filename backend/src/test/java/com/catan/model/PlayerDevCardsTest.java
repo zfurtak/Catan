@@ -5,6 +5,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Class used to test the PlayerDevCards class
+ * @author Ivan Iroslavov
+ */
 class PlayerDevCardsTest {
     private PlayerDevCards playerDevCards;
     private Player player;
