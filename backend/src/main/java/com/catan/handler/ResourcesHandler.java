@@ -14,6 +14,7 @@ import java.util.List;
 
 /**
  * Handler for the resources distribution
+ * @author Zuzanna Furtak
  */
 @Component
 public class ResourcesHandler {

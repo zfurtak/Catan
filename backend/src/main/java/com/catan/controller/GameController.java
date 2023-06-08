@@ -32,7 +32,7 @@ import java.util.List;
         @ApiResponse(responseCode = "409", description = "Conflict"),
         @ApiResponse(responseCode = "500", description = "Internal Server Error")})
 
-@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT})
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.OPTIONS})
 public class GameController {
     private final GameService gameService;
     private final ResourcesHandler resourcesHandler;

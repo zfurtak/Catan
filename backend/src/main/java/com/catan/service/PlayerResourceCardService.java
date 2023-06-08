@@ -11,7 +11,8 @@ import java.util.List;
 
 /**
  * Service for the PlayerResourceCard class.
- * @author Minerva Gomez
+ * @author Zuzanna Furtak
+ * @author Agnieszka Lasek
  */
 @Service
 public class PlayerResourceCardService {
@@ -50,7 +51,6 @@ public class PlayerResourceCardService {
      * or does not have cards of the specified resource type
      * @param playerId id of the player whose resource is being deleted
      * @param resource resource type to be deleted
-     * @author Minerva Gomez
      */
     public void deleteByPlayerIdAndResource(int playerId, Resource resource){
         List <PlayerResourceCard> resources = this.findAllCardsByPlayerId(playerId);

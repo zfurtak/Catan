@@ -18,6 +18,8 @@ import java.util.*;
 
 /**
  * Service for the Player class.
+ * @author Zuzanna Furtak
+ * @author Agnieszka Lasek
  */
 @Service
 public class PlayerService {
@@ -93,6 +95,7 @@ public class PlayerService {
      * Returns a map with the resources and quantity of the player with the specified id.
      * @param playerId id of the player whose resources are got
      * @return map of the resources and quantity
+     * @author Agnieszka Lasek
      */
     public Map<Resource, Integer> getPlayerResources(int playerId) {
         List<PlayerResourceCard> resourceCards = playerResourceCardService.findAllCardsByPlayerId(playerId);
@@ -126,10 +129,11 @@ public class PlayerService {
     /**
      * Takes four units of the specified resource from the player with the specified id. Then, it adds to the player's resources one unit of the specified resource from the bank.
      * @exception UserNotFoundException if the player with the specified id is not saved in the repository
-     * @exception ResourceCardNotFoundException if the player with the specified id does not have cards saved in the repository
+     * @exception com.catan.exceptions.ResourceCardNotFoundException if the player with the specified id does not have cards saved in the repository
      * @param playerId id of the player who is trading with the bank
      * @param resourceFromPlayer resource type the player gives the bank
      * @param resourceFromBank resource type the bank gives the player
+     * @author Zuzanna Furtak
      */
     public void updateCardsAfterTradingWithBank(int playerId, Resource resourceFromPlayer, Resource resourceFromBank){
         for(int i = 0; i < 4; i++)
@@ -146,6 +150,7 @@ public class PlayerService {
      * @param resourceToGet resource type the accepting player gives
      * @param numResourcesOffered number of offered resources the offering player gives
      * @param numResourcesToGet number of accepted resources the accepting player gives
+     * @author Agnieszka Lasek
      */
     public void updateCardsAfterTradingWithPlayer(int offeringPlayerId, int acceptingPlayerId, Resource resourceOffered,
                                                   Resource resourceToGet, int numResourcesOffered, int numResourcesToGet){

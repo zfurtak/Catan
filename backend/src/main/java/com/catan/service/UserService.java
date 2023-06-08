@@ -22,7 +22,7 @@ import java.util.Optional;
 /**
  * Service for the User class.
  * @author Zuzanna Furtak
- * @author Minerva Gomez
+ * @author Agnieszka Lasek
  */
 @Service
 public class UserService {
@@ -31,7 +31,6 @@ public class UserService {
     /**
      * Initialize the service.
      * @param userRepository the User repository associated to this service
-     * @param playerService the Player service associated to this service
      */
     @Autowired
     public UserService(UserRepository userRepository){
@@ -57,6 +56,7 @@ public class UserService {
      * Hashes the provided password.
      * @param password the password to be hashed
      * @return hashed password
+     * @author Agnieszka Lasek
      */
     public String hashPassword(String password){
         return Hashing.sha256().hashString(password, StandardCharsets.UTF_8).toString();
@@ -113,7 +113,7 @@ public class UserService {
      * @param password password of the user to be created
      * @return new user with the specified username and password
      * @author Zuzanna Furtak
-     * @author Minerva Gomez
+     * @author Agnieszka Lasek
      */
     public User registerUser(String username, String password){
         if(username.length() >= 4){
@@ -151,6 +151,8 @@ public class UserService {
      * @param id id of the user to be updated
      * @param newUser user containing the new information to be stored in the user
      * @return the new user after associating it to the specified id
+     * @author Zuzanna Furtak
+     * @author Agnieszka Lasek
      */
     public User updateUserById(int id, User newUser){
         Optional<User> oldUserDB = userRepository.findById(id);

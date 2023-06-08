@@ -57,7 +57,7 @@ public class BuildHandler {
      * @param edge edge where the road is built
      * @return game where this action is activated
      * @author rorro6787
-     * @author zuzka
+     * @author Zuzanna Furtak
      */
     public Game buildRoad(int playerId, Edge edge){
         Edge edgeDB = edgeService.getEdge(edge.getId());
@@ -106,7 +106,8 @@ public class BuildHandler {
      * @param vertex vertex where the village is built
      * @return game where this action is activated
      * @author rorro6787
-     * @author zuzka
+     * @author Zuzanna Furtak
+     * @author Agnieszka Lasek
      */
     public Game buildVillage(int playerId, Vertex vertex) {
         Vertex vertexDB = vertexService.getVertex(vertex);
@@ -160,7 +161,8 @@ public class BuildHandler {
      * @param vertex vertex where the city is built
      * @return game where this action is activated
      * @author rorro6787
-     * @author zuzka
+     * @author Zuzanna Furtak
+     * @author Agnieszka Lasek
      */
     public Game buildCity(int playerId, Vertex vertex) {
         Vertex vertexDB = vertexService.getVertex(vertex);
@@ -185,7 +187,8 @@ public class BuildHandler {
      * @param playerId id of the player trying to build
      * @return boolean that is true if the player has enough resources, else false
      * @author rorro6787
-     * @author zuzka
+     * @author Zuzanna Furtak
+     * @author Agnieszka Lasek
      */
     private boolean hasEnoughResourcesToBuild(BuildingType buildingType, int playerId) {
         Map<Resource, Integer> resources = playerService.getPlayerResources(playerId);

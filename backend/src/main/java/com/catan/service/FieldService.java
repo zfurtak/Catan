@@ -10,6 +10,8 @@ import java.util.List;
 
 /**
  * Service for the Field class.
+ *  @author Zuzanna Furtak
+ *  @author Agnieszka Lasek
  */
 @Service
 public class FieldService {

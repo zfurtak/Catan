@@ -46,7 +46,6 @@ public class GameService {
      * @param userId id of the user that is going to join
      * @return game the player has joined to
      * @author Zuzanna Furtak
-     * @author Minerva Gomez
      */
     public Game joinGame(int userId) {
         User user = userService.getUserById(userId);
@@ -139,7 +138,7 @@ public class GameService {
      * @param
      * @return
      * @author rorro6787
-     * @author zuzka
+     * @author Zuzanna Furtak
      */
     public Game tradeWithBank(int playerId, TradingDTO tradingDTO){
         Resource resourceFromPlayer = tradingDTO.convertPlayerResourceFromInt();
@@ -154,16 +153,15 @@ public class GameService {
         return this.getGame();
     }
 
-    // exception thrown if player has no resources
-    // choose resources to offer
-    // choose resources to get in return
-    // send trade offer
-    // wait for other players to accept/decline offer
-    // if anyone accepted finish trade
-    // if everyone declined finish trade
-    // else wait (if timeout then finish trade)
-    // return updated game
-    // we assume that one of the players offered a trade deal and one of the other players accepted it
+    /**
+     *
+     * @param offeringPlayerId id of a player who offered the trade
+     * @param acceptingPlayerId id of a player who accepted the trade
+     * @param tradingDTO trading DTO, containing information about the resources offered and expected in the trade
+     * @return game object updated after trading with a player
+     * @author Agnieszka Lasek
+     */
+
     public Game tradeWithPlayer(int offeringPlayerId, int acceptingPlayerId, TradingDTO tradingDTO) {
         Resource resourceToOffer = tradingDTO.convertResourceToOffer();
         Resource resourceToGet = tradingDTO.convertResourceToGet();
