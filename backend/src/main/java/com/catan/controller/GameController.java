@@ -64,8 +64,8 @@ public class GameController {
     }
 
     @Operation(summary = "", description = "Distributes resources among the different players of the game")
-    @PutMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> distributeResources(@RequestBody int diceNumber) {
+    @PutMapping(value = "", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public ResponseEntity<Void> distributeResources(@RequestParam("diceNumber") int diceNumber) {
         resourcesHandler.distributeResources(diceNumber);
         return ResponseEntity.ok().build();
     }
@@ -76,14 +76,14 @@ public class GameController {
     }
 
     @Operation(summary = "", description = "Returns a List of the resources that the player currently has")
-    @GetMapping(value = "tradeWithBank/{userId}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/tradeWithBank/{userId}")
     public List<Integer> getResourcesToTradeWithBank(@PathVariable int userId) {
         return gameService.getResourcesToTradeWithBank(userId);
     }
 
     @Operation(summary = "", description = "Perfoms the resource trade between the player and the bank " +
                                            "if the player has the needed resource")
-    @PutMapping(value = "tradeWithBank/{playerId}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/tradeWithBank/{playerId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Game tradeWithBank(@PathVariable int playerId,
                               @RequestBody TradingDTO tradingDTO){
         return gameService.tradeWithBank(playerId, tradingDTO);
@@ -117,7 +117,7 @@ public class GameController {
     }
 
     @DeleteMapping()
-    public void deleteGame(){
+    public void deleteGame() {
         gameService.deleteAllGames();
     }
 }
